@@ -1,50 +1,27 @@
-# Ant-violet - 一套基于 Vue 2.5 的 UI 组件库
+# Ant-violet
 
 作者: Carol
 
 ## 介绍
 
-这是我在学习 Vue 过程中做的一个 UI 框架, 希望对你有帮助.
+这是我在学习 Vue 过程中做的一个 UI 框架，本组件库仅供学习交流，请勿在生产环境中使用。希望对你有帮助...
 
-## 开始使用
+## 官方文档
+[我是链接]()
 
-1. 添加 CSS 样式
+## 安装
 
-使用本框架前, 请在 CSS 中开启 border-box
-
-```css
-*,
-* ::before,
-* ::after {
-  box-sizing: border-box;
-}
-```
-
-IE 8 及以上浏览器都支持此样式
-
-你还需要设置默认颜色等变量(后续会改为 scss 变量)
-
-```css
-html {
-  --button-height: 32px;
-  --font-size: 14px;
-  --button-bg: white;
-  --button-active-bg: #eee;
-  --border-radius: 4px;
-  --color: #333;
-  --border-color: #999;
-  --border-color-hover: #666;
-}
-```
-IE 15 及以上浏览器都支持此样式
-
-2. 安装 ant-violet
+克隆官方仓库或者使用 npm / yarn 安装
 
 ```
-npm i -S ant-violet
+$ git clone git@github.com:yuyuye958/GuLu-UI.git
+    
+$ npm install ant-violet --save
+$ yarn add ant-violet --save
 ```
 
-3. 引入 ant-violet
+## 使用
+如果使用了 npm / yarn 安装，一般在 main.js 中如下配置：
 ```js
 import {Button} from 'ant-violet'
 import 'ant-violet/dist/ant-violet.css'
@@ -57,12 +34,20 @@ export default {
 }
 ```
 
-## 文档
+## 特别提醒
+使用 ant-violet 时，您需要使用 border-box 盒模型，否则会影响样式。CSS 代码示例：
 
-## 提问
-
-## 变更记录
+```css
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```
 
 ## 联系方式
+Email: 1428620591@qq.com
 
-## 贡献代码
+如果您觉得还不错，请 star
