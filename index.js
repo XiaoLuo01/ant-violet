@@ -1,3 +1,4 @@
-import HelloWorld from './src/components/HelloWorld.vue'
+import Button from './src/basic/button/button.vue'
+import Icon from './src/basic/icon/icon.vue'
 
-export {HelloWorld}
+export {Button, Icon}
