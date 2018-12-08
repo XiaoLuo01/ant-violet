@@ -1,17 +1,17 @@
 {
-  "name": "violet-ui",
+  "name": "ant-violet",
   "version": "0.0.1",
   "description": "一套基于 Vue 2.5 的 UI 框架",
-  "private": true,
-  "main": "dist/violet-ui.umd.min.js",
+  "private": false,
+  "main": "dist/ant-violet.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name violet-ui",
+    "build": "vue-cli-service build --target lib --name ant-violet",
     "test:unit": "vue-cli-service test:unit"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:XiaoLuo01/violet-ui.git"
+    "url": "git@github.com:XiaoLuo01/ant-violet.git"
   },
   "keywords": [
     "vue",

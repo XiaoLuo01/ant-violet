@@ -1,4 +1,4 @@
-# Violet-ui - 一套基于 Vue 2.5 的 UI 组件库
+# Ant-violet - 一套基于 Vue 2.5 的 UI 组件库
 
 作者: Carol
 
@@ -38,16 +38,16 @@ html {
 ```
 IE 15 及以上浏览器都支持此样式
 
-2. 安装 violet_ui
+2. 安装 ant-violet
 
 ```
-npm i -S violet_ui
+npm i -S ant-violet
 ```
 
-3. 引入 violet_ui
+3. 引入 ant-violet
 ```js
-import {Button} from 'violet_ui'
-import 'violet_ui/dist/index.css'
+import {Button} from 'ant-violet'
+import 'ant-violet/dist/ant-violet.css'
 
 export default {
   name: 'app',
