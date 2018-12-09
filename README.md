@@ -2,6 +2,8 @@
 
 作者: Carol
 
+[![Build Status](https://www.travis-ci.org/XiaoLuo01/ant-violet.svg?branch=master)](https://www.travis-ci.org/XiaoLuo01/ant-violet)
+
 ## 介绍
 
 这是我在学习 Vue 过程中做的一个 UI 框架，本组件库仅供学习交流，请勿在生产环境中使用。希望对你有帮助...
