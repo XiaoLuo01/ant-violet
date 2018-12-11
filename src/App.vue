@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <div class="box">
+      <v-button>按钮</v-button>
+    </div>
+    <div class="box">
       <v-icon name="setting"></v-icon>
     </div>
   </div>
@@ -8,10 +11,12 @@
 
 <script>
 import Icon from "./basic/icon/icon";
+import Button from "./basic/button/button";
 export default {
   name: 'app',
   components: {
-    'v-icon': Icon
+    'v-icon': Icon,
+    'v-button': Button
   }
 }
 </script>
