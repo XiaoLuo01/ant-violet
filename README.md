@@ -16,7 +16,7 @@
 克隆官方仓库或者使用 npm / yarn 安装
 
 ```
-$ git clone git@github.com:yuyuye958/GuLu-UI.git
+$ git clone https://github.com/XiaoLuo01/ant-violet.git
     
 $ npm install ant-violet --save
 $ yarn add ant-violet --save
