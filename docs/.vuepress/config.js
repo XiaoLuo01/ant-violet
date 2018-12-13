@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/Ant-violet/',
+  base: '/ant-violet/',
   title: 'Ant-violet',
   description: '一个好用的 UI 框架',
   themeConfig: {

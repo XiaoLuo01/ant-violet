@@ -10967,18 +10967,10 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.5.16:
+vue-template-compiler@^2.5.16, vue-template-compiler@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.21.tgz#a57ceb903177e8f643560a8d639a0f8db647054a"
   integrity sha512-Vmk5Cv7UcmI99B9nXJEkaK262IQNnHp5rJYo+EwYpe2epTAXqcVyExhV6pk8jTkxQK2vRc8v8KmZBAwdmUZvvw==
-  dependencies:
-    de-indent "^1.0.2"
-    he "^1.1.0"
-
-vue-template-compiler@^2.5.17:
-  version "2.5.18"
-  resolved "http://r.cnpmjs.org/vue-template-compiler/download/vue-template-compiler-2.5.18.tgz#8a346e477c5ada6efc890a2db4857090a2c54a05"
-  integrity sha1-ijRuR3xa2m78iQottIVwkKLFSgU=
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -10988,15 +10980,10 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "http://r.cnpmjs.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   integrity sha1-3EJpcTMwLOMBdSQ1amxht7abShg=
 
-vue@^2.5.16:
+vue@^2.5.16, vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
-
-vue@^2.5.17:
-  version "2.5.18"
-  resolved "http://r.cnpmjs.org/vue/download/vue-2.5.18.tgz#885586eda5c8efc77140a497500b73620e53c1dd"
-  integrity sha1-iFWG7aXI78dxQKSXUAtzYg5Twd0=
 
 vuepress-html-webpack-plugin@^3.2.0:
   version "3.2.0"

@@ -23,7 +23,7 @@
   "license": "MIT",
   "author": "Carol",
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.21"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
@@ -41,7 +41,7 @@
     "sass-loader": "^7.0.1",
     "sinon": "^7.2.0",
     "sinon-chai": "^3.3.0",
-    "vue-template-compiler": "^2.5.17",
+    "vue-template-compiler": "^2.5.21",
     "vuepress": "^0.14.8"
   },
   "postcss": {
