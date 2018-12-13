@@ -15,5 +15,8 @@ module.exports = {
         children: [ '/components/basic', '/components/layout' ]
       }
     ]
+  },
+  scss:{
+    data: `@import "styles/_var.scss";`
   }
 }

@@ -1,3 +1,3 @@
 # 组件
 
-[Button](./button.md)
+[Button](./basic.md)

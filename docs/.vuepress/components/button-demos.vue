@@ -16,10 +16,10 @@ export default {
   data() {
     return {
       content: `
-        <g-button>默认按钮</g-button>
-        <g-button icon="settings">默认按钮</g-button>
-        <g-button :loading="true">默认按钮</g-button>
-        <g-button disabled>默认按钮</g-button>
+        <v-button>默认按钮</v-button>
+        <v-button icon="settings">默认按钮</v-button>
+        <v-button :loading="true">默认按钮</v-button>
+        <v-button disabled>默认按钮</v-button>
       `.replace(/\t+| +/g, '').trim()
     };
   },
