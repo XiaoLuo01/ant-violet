@@ -1,4 +1,15 @@
-import Button from './src/basic/button/button.vue'
-import Icon from './src/basic/icon/icon.vue'
+import Icon from './src/basic/icon/index.js'
+import Button from './src/basic/button/index.js'
 
-export {Button, Icon}
+const components = [
+  Icon,
+  Button
+]
+
+const install = Vue => {
+  components.forEach(component => {
+    component.install(Vue)
+  })
+}
+
+export default { install }
