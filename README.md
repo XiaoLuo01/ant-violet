@@ -23,17 +23,41 @@ $ yarn add ant-violet --save
 ```
 
 ## 使用
+### 完整引入
 如果使用了 npm / yarn 安装，一般在 main.js 中如下配置：
 ```js
-import {Button} from 'ant-violet'
+import Vue from 'vue'
+import App from './app.vue'
+import antV from 'ant-violet'
 import 'ant-violet/dist/ant-violet.css'
 
-export default {
-  name: 'app',
-  components: {
-    Button
-  }
-}
+Vue.use(antV)
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})
+```
+以上代码便完成了 Xue-ui 的引入。需要注意的是，样式文件需要单独引入。
+
+### 按需引入
+如果你只希望引入部分组件，比如 Button 和 Icon，那么需要在 main.js 中写入以下内容：
+```js
+import Vue from 'vue';
+import App from './App.vue';
+import { Button, Icon } from 'ant-violet';
+import 'ant-violet/dist/ant-violet.css'
+
+Vue.component(Button.name, Button);
+Vue.component(Icon.name, Icon);
+/* 或写为
+ * Vue.use(Button)
+ * Vue.use(Icon)
+ */
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
 ```
 
 ## 特别提醒
