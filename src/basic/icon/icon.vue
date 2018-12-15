@@ -7,7 +7,7 @@
 <script>
 import "./svg"
 export default {
-  name: "VioIcon",
+  name: "vIcon",
   data() {
     return {}
   },

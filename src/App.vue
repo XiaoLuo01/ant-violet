@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="box">
-      <v-button>按钮</v-button>
+      <v-button>按钮11</v-button>
     </div>
     <div class="box">
       <v-icon name="setting"></v-icon>

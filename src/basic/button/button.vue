@@ -11,7 +11,7 @@
 <script>
 import Icon from './../icon/icon'
 export default {
-  name: 'VioButton',
+  name: 'vButton',
   props: {
     icon: {},
     loading: {

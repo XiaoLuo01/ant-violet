@@ -1,5 +1,5 @@
-import Icon from './src/basic/icon/index.js'
-import Button from './src/basic/button/index.js'
+import Icon from './src/basic/icon/icon.js'
+import Button from './src/basic/button/button.js'
 
 const components = [
   Icon,
@@ -8,8 +8,15 @@ const components = [
 
 const install = Vue => {
   components.forEach(component => {
-    component.install(Vue)
+    Vue.component(component.name, component);
   })
 }
 
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
+}
+
 export default { install }
+
+export { Button }
