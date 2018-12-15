@@ -10,7 +10,8 @@
     "test": "karma start --single-run",
     "test:unit": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
   },
   "repository": {
     "type": "git",
