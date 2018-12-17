@@ -1,10 +1,10 @@
 <template>
   <div style="margin: 30px 0">
     <div id="icons-demo">
-      <v-icon name="edit"></v-icon>
-      <v-icon name="share"></v-icon>
-      <v-icon name="delete"></v-icon>
-      <div class="button"><v-button icon="search">搜索</v-button></div>
+      <v-icon name="v-edit"></v-icon>
+      <v-icon name="v-share"></v-icon>
+      <v-icon name="v-delete"></v-icon>
+      <div class="button"><v-button icon="v-search">搜索</v-button></div>
     </div>
 
     <pre style="margin: 30px 0"><code>{{content}}</code></pre>
@@ -22,10 +22,10 @@ export default {
   data() {
     return {
       content: `
-        <v-icon name="edit"></v-icon>
-        <v-icon name="share"></v-icon>
-        <v-icon name="delete"></v-icon>
-        <v-button icon="search">搜索</v-button>
+        <v-icon name="v-edit"></v-icon>
+        <v-icon name="v-share"></v-icon>
+        <v-icon name="v-delete"></v-icon>
+        <v-button icon="v-search">搜索</v-button>
         `.replace(/ {4}/gm, "")
         .trim()
     };
