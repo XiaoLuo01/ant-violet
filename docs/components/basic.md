@@ -8,13 +8,19 @@ title: Basic 通用
 ### 使用方法
 
 <ClientOnly>
-  <icon-demos></icon-demos>
+  <icon-demo1></icon-demo1>
 </ClientOnly>
 
 ### Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
-:-:| - | :-: | :-: | :-: 
+:-:| :-: | :-: | :-: | :-: 
 name | icon 图标名 | String | —— | ——
+
+
+### 图标集合
+<ClientOnly>
+  <icon-demo2></icon-demo2>
+</ClientOnly>
 
 ## Button - 按钮
 

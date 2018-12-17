@@ -68,7 +68,10 @@ export default {
     outline: none;
   }
   > .icon {
+    width: 14px;
+    height: 14px;
     order: 1;
+    margin-left: 0;
     margin-right: .3em;
   }
   > .button-content {
