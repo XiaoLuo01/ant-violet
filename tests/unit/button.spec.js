@@ -13,24 +13,24 @@ describe('Button 组件', () => {
   it('可以设置 icon.', () => {
     const wrapper = mount(Button, {
       propsData: {
-        icon: 'setting'
+        icon: 'v-settings'
       }
     })
     const useElement = wrapper.find('use')
-    expect(useElement.attributes()['href']).to.eq('#i-setting')
+    expect(useElement.attributes()['href']).to.eq('#v-settings')
   })
   
   it('可以设置 loading.', () => {
     const wrapper = mount(Button, {
       propsData: {
-        icon: 'setting',
+        icon: 'v-settings',
         loading: true
       }
     })
     const vm = wrapper.vm
     const useElements = vm.$el.querySelectorAll('use')
     expect(useElements.length).to.equal(1)
-    expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading')
+    expect(useElements[0].getAttribute('xlink:href')).to.equal('#v-loading')
   })
 
   it('icon 默认的 order 是 1', () => {
@@ -49,7 +49,7 @@ describe('Button 组件', () => {
     const wrapper = mount(Button, {
       attachToDocument: true,
       propsData: {
-        icon: 'setting',
+        icon: 'settings',
         iconPosition: 'right'
       }
     })
@@ -61,7 +61,7 @@ describe('Button 组件', () => {
   it('点击 button 触发 click 事件', () => {
     const wrapper = mount(Button, {
       propsData: {
-        icon: 'setting',
+        icon: 'settings',
       }
     })
     const vm = wrapper.vm

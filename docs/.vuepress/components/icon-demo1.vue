@@ -7,7 +7,7 @@
       <div class="button"><v-button icon="v-search">搜索</v-button></div>
     </div>
 
-    <pre style="margin: 30px 0"><code>{{content}}</code></pre>
+    <!-- <pre style="margin: 30px 0"><code>{{content}}</code></pre> -->
 
   </div>
 </template>
