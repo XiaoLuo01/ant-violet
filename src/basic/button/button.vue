@@ -47,6 +47,7 @@ export default {
   }
 }
 .button {
+  box-sizing: border-box;
   font-size: $font-size;
   height: $button-height; 
   padding: 0 1em;

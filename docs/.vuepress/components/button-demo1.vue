@@ -1,6 +1,6 @@
 <template>
   <div style="margin: 30px 0">
-    <v-button>默认按钮</v-button>
+    <v-button>Default</v-button>
     <v-button icon="setting">默认按钮</v-button>
     <v-button :loading="true">默认按钮</v-button>
     <v-button disabled>默认按钮</v-button>

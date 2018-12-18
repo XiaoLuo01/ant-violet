@@ -35,7 +35,7 @@ name | icon 图标名 | String | —— | ——
 ### 使用方法:
 
 <ClientOnly>
-  <button-demos></button-demos>
+  <button-demo1></button-demo1>
 </ClientOnly>
 
 ```HTML
