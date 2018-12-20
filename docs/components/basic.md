@@ -32,10 +32,24 @@ name | icon 图标名 | String | —— | ——
 ## Button - 按钮
 常用的按钮组件，点击触发事件。
 
-### 使用方法:
+### 基础用法:
 
 <ClientOnly>
   <button-demo1></button-demo1>
+</ClientOnly>
+
+```HTML
+<v-button>Default</v-button>
+<v-button primary>Primary</v-button>
+<v-button dashed>Dashed</v-button>
+<v-button danger>Danger</v-button>
+<v-button disabled>Disabled</v-button>
+```
+
+### 图标按钮、加载按钮
+
+<ClientOnly>
+  <button-demo2></button-demo2>
 </ClientOnly>
 
 ```HTML

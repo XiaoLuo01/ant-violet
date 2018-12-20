@@ -1,9 +1,10 @@
 <template>
   <div style="margin: 30px 0">
     <v-button>Default</v-button>
-    <v-button icon="setting">默认按钮</v-button>
-    <v-button :loading="true">默认按钮</v-button>
-    <v-button disabled>默认按钮</v-button>
+    <v-button primary>Primary</v-button>
+    <v-button dashed>Dashed</v-button>
+    <v-button danger>Danger</v-button>
+    <v-button disabled>Disabled</v-button>
 
   </div>
 </template>
@@ -21,3 +22,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.button {
+  margin-right: 10px;
+}
+</style>
