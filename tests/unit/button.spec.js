@@ -33,6 +33,50 @@ describe('Button 组件', () => {
     expect(useElements[0].getAttribute('xlink:href')).to.equal('#v-loading')
   })
 
+  it('可以设置 primary.', () => {
+    const wrapper = mount(Button, {
+      propsData: {
+        primary: true
+      }
+    })
+    const vm = wrapper.vm
+    expect(vm.$el.classList.contains('primary')).to.equal(true)
+  })
+
+  it('可以设置 dashed.', () => {
+    const wrapper = mount(Button, {
+      propsData: {
+        dashed: true
+      }
+    })
+    const vm = wrapper.vm
+    expect(vm.$el.classList.contains('dashed')).to.equal(true)
+  })
+
+  it('可以设置 danger.', () => {
+    const wrapper = mount(Button, {
+      propsData: {
+        danger: true
+      }
+    })
+    const vm = wrapper.vm
+    expect(vm.$el.classList.contains('danger')).to.equal(true)
+  })
+
+  it('可以设置 disabled.', () => {
+    const wrapper = mount(Button, {
+      propsData: {
+        disabled: true
+      }
+    })
+    const vm = wrapper.vm
+    expect(vm.$el.classList.contains('disabled')).to.equal(true)
+    const callback = sinon.fake();
+    vm.$on('click', callback)
+    vm.$el.click()
+    expect(callback).to.have.not.been.called
+  })
+
   it('icon 默认的 order 是 1', () => {
     const wrapper = mount(Button, {
       attachToDocument: true,
@@ -65,7 +109,7 @@ describe('Button 组件', () => {
       }
     })
     const vm = wrapper.vm
-     const callback = sinon.fake();
+    const callback = sinon.fake();
     vm.$on('click', callback)
     vm.$el.click()
     expect(callback).to.have.been.called
