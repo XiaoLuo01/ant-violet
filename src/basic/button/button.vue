@@ -1,11 +1,11 @@
 <template>
-  <div class="button" :class="{[`icon-${iconPosition}`]:true, wave, primary, danger, dashed, disabled}" @click="onClick">
+  <button type="button" class="button" :class="{[`icon-${iconPosition}`]:true, wave, primary, danger, dashed, disabled}" @click="onClick">
     <v-icon class="icon" v-if="icon && !loading" :name="icon"></v-icon>
     <v-icon class="icon loading" v-if="loading" name="v-loading"></v-icon>
     <div class="button-content">
       <slot></slot>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -102,6 +102,7 @@ export default {
   justify-content: center; 
   align-items: center;
   vertical-align: middle;
+  outline: none;
   cursor: pointer;
   position: relative;
   &:hover, &:focus {
@@ -123,6 +124,9 @@ export default {
       border-color: $border-color-hover;
       background: $border-color-hover;
     }
+    > .icon {
+      fill: #fff;
+    }
   }
   &.dashed {
     border-style: dashed;
@@ -134,6 +138,12 @@ export default {
       color: #fff;
       background-color: #ff4d4f;
       border-color: #ff4d4f;
+      > .icon {
+        fill: #fff;
+      }
+    }
+    > .icon {
+      fill: #ff4d4f;
     }
   }
   &.disabled {
