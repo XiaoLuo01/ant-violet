@@ -71,3 +71,23 @@ dashed | 虚线按钮 | Boolean | —— | false
 danger | 危险按钮 | Boolean | —— | false
 disabled | 禁用按钮 | Boolean | —— | false
 loading | 带 loading 效果的按钮 | Boolean | —— | false
+
+## ButtonGroup - 组合按钮
+横向排列的按钮组合。
+
+<ClientOnly>
+  <button-group-demo></button-group-demo>
+</ClientOnly>
+
+```HTML
+<v-button-group>
+  <v-button icon="v-arrow-left">上一页</v-button>
+  <v-button>更多</v-button>
+  <v-button icon="v-arrow-right" icon-position="right" >下一页</v-button>
+</v-button-group>
+
+<v-button-group>
+  <v-button icon="v-arrow-left" primary>Go back</v-button>
+  <v-button icon="v-arrow-right" primary icon-position="right">Go forward</v-button>
+</v-button-group>
+```
