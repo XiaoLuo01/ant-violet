@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       iconList: [
-        'v-warning', 'v-question', 'v-info', 'v-success', 'v-error', 'v-loading', 'v-settings', 'v-upload1', 'v-upload', 'v-download', 'v-share', 'v-edit', 'v-edit-outline', 'v-location', 'v-location-outline', 'v-phone', 'v-phone-outline', 'v-more', 'v-more-outline', 'v-star-on', 'v-star-off', 'v-delete', 'v-picture', 'v-picture-outline', 'v-search', 'v-menu', 'v-time', 'v-view', 'v-service', 'v-bell','v-goods',  'v-sold-out', 'v-document', 'v-tickets', 'v-printer', 'v-news', 'v-date', 'v-message', 'v-sort-up', 'v-sort-down', 'v-sort', 'v-caret', 'v-check', 'v-close', 'v-remove', 'v-remove-outline', 'v-circle-plus', 'v-plus-outline', 'v-plus', 'v-minus', 'v-caret-left', 'v-caret-top', 'v-caret-right', 'v-caret-bottom', 'v-d-arrow-right', 'v-d-arrow-left', 'v-arrow-left', 'v-arrow-top', 'v-arrow-right', 'v-arrow-down'
+        'v-warning', 'v-question', 'v-info', 'v-success', 'v-error', 'v-loading', 'v-settings', 'v-upload1', 'v-upload', 'v-download', 'v-share', 'v-edit', 'v-edit-outline', 'v-location', 'v-location-outline', 'v-phone', 'v-phone-outline', 'v-more', 'v-more-outline', 'v-star-on', 'v-star-off', 'v-delete', 'v-picture', 'v-picture-outline', 'v-search', 'v-menu', 'v-time', 'v-view', 'v-service', 'v-bell','v-goods',  'v-sold-out', 'v-document', 'v-tickets', 'v-printer', 'v-news', 'v-date', 'v-message', 'v-login', 'v-password', 'v-sort', 'v-caret', 'v-check', 'v-close', 'v-remove', 'v-remove-outline', 'v-circle-plus', 'v-plus-outline', 'v-plus', 'v-minus', 'v-caret-left', 'v-caret-top', 'v-caret-right', 'v-caret-bottom', 'v-d-arrow-right', 'v-d-arrow-left', 'v-arrow-left', 'v-arrow-top', 'v-arrow-right', 'v-arrow-down'
       ]
     };
   }
