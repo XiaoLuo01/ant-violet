@@ -1,9 +1,11 @@
-import Icon from './src/basic/icon/icon.js'
-import Button from './src/basic/button/button.js'
+import Icon from './src/basic/icon/icon.js';
+import Button from './src/basic/button/button.js';
+import Input from './src/form/input/input.js';
 
 const components = [
   Icon,
-  Button
+  Button,
+  Input
 ]
 
 const install = Vue => {
@@ -19,4 +21,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default { install }
 
-export { Button }
+export { Button, Icon, Input }
