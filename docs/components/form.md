@@ -13,6 +13,29 @@ title: form 表单
 
 ```HTML
 <v-input placeholder="Basic usage"></v-input>
+<v-input disabled value="Disabled usage"></v-input>
+<v-input icon="v-login" placeholder="user name"></v-input>
+<v-input value="Error usage" error="Error Text!"></v-input>
 ```
 
 ### 双向绑定
+
+<ClientOnly>
+  <input-demo2></input-demo2>
+</ClientOnly>
+
+```HTML
+<!-- template 内容 -->
+<v-input v-model="message"></v-input>
+<v-button @click="message+=1">+1</v-button>
+<p>您输入的内容为 : {{message}}</p>
+```
+
+```js
+// data 内容
+data() {
+  return {
+    message: '改变此处的内容'
+  }
+}
+```
