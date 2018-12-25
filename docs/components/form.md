@@ -39,3 +39,13 @@ data() {
   }
 }
 ```
+
+### Attributes
+
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+value | 绑定的值，可使用 v-model 双向绑定 | String | — | false
+placeholder | 占位文本 | String | — | —
+disabled | 禁止输入状态 | Boolean | — | false
+error | 错误状态，提示错误信息 | String | — | —
+icon | 输入框头部图标 | String | — | —

@@ -21,7 +21,7 @@ title: Basic 通用
 ### Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
-name | icon 图标名 | String | —— | ——
+name | icon 图标名 | String | — | —
 
 
 ### 图标集合
@@ -64,13 +64,13 @@ name | icon 图标名 | String | —— | ——
 
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
-icon | icon 图标名 | String | —— | ——
+icon | icon 图标名 | String | — | —
 icon-position | icon 位置 | String | left, right | left
-primary | 主题色按钮 | Boolean | —— | false
-dashed | 虚线按钮 | Boolean | —— | false
-danger | 危险按钮 | Boolean | —— | false
-disabled | 禁用按钮 | Boolean | —— | false
-loading | 带 loading 效果的按钮 | Boolean | —— | false
+primary | 主题色按钮 | Boolean | — | false
+dashed | 虚线按钮 | Boolean | — | false
+danger | 危险按钮 | Boolean | — | false
+disabled | 禁用按钮 | Boolean | — | false
+loading | 带 loading 效果的按钮 | Boolean | — | false
 
 ## ButtonGroup - 组合按钮
 横向排列的按钮组合。
