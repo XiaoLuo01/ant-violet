@@ -47,4 +47,23 @@ describe('Input 组件', () => {
 
   })
 
+  describe("事件", () => {
+
+    it("支持 change/input/focus/blur 事件", () => {
+      ;["change", "input", "focus", "blur"].forEach(eventName => {
+        const wrapper = mount(Input, {})
+        const vm = wrapper.vm
+        const callback = sinon.fake();
+        vm.$on(eventName, callback)
+        // 触发 input 的 change 事件
+        var event = new Event(eventName)
+        Object.defineProperty(event, 'target', {value: {value:'hi'}, enumerable: true})
+        let inputElement = vm.$el.querySelector("input")
+        inputElement.dispatchEvent(event)
+        expect(callback).to.have.been.calledWith('hi')
+      })
+    })
+
+  })
+
 })
