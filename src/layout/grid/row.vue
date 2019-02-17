@@ -1,6 +1,6 @@
 <template>
   <div class="v-row">
-
+    <slot></slot>
   </div>
 </template>
 
@@ -16,5 +16,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.v-row {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
