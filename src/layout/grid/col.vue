@@ -1,6 +1,8 @@
 <template>
-  <div class="v-col" :class="[span && `col-${span}`]">
-    <slot></slot>
+  <div class="v-col" :class="[span && `col-${span}`,  offset && `offset-${offset}`, gutter?'gutter-row':'']" :style="colStyle">
+    <div :class="[gutter?'gutter-box':'']">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -10,32 +12,62 @@ export default {
   props: {
     span: {
       type: [Number, String]
-    }
+    },
+    offset: {
+      type: [Number, String]
+    },
   },
   data() {
     return {
-
+      gutter: 0
     }
   },
+  computed: {
+    colStyle() {
+      return {
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
+      }
+    }
+  }
 }
+
 </script> 
 
 <style scoped lang="scss">
 .v-col {
   background: $grid-bg;
-  padding: 8px 0;
-  height: 24px;
-  // width: 50%;
-  text-align: center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
   &:nth-child(odd) {
     background: $grid-bg-light;
+  }
+  &.gutter-row {
+    background: transparent;
+    .gutter-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 100%;
+      background: $grid-bg;
+    }
   }
 
   $class: col-;
   @for $n from 1 through 24 {
     &.#{$class}#{$n} {
       width: ($n / 24) * 100%;
+    }
+  }
+
+  $class: offset-;
+  @for $n from 1 through 24 {
+    &.#{$class}#{$n} {
+      margin-left: ($n / 24) * 100%;
     }
   }
 }

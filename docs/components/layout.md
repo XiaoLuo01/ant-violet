@@ -40,6 +40,16 @@ title: layout 布局
 </ClientOnly>
 
 ```HTML
+<v-row gutter="10">
+  <v-col span="12">col-12</v-col>
+  <v-col span="12">col-12</v-col>
+</v-row>
+<v-row gutter="10">
+  <v-col span="6">col-6</v-col>
+  <v-col span="6">col-6</v-col>
+  <v-col span="6">col-6</v-col>
+  <v-col span="6">col-6</v-col>
+</v-row>
 ```
 
 ### 左右偏移
@@ -50,10 +60,21 @@ title: layout 布局
 </ClientOnly>
 
 ```HTML
+<v-row>
+  <v-col span="10">col-10</v-col>
+  <v-col span="10" offset="4">col-10</v-col>
+</v-row>
+<v-row>
+  <v-col span="6" offset="6">col-6</v-col>
+  <v-col span="6" offset="6">col-6</v-col>
+</v-row>
+<v-row>
+  <v-col span="12" offset="6">col-12 col-offset-6</v-col>
+</v-row>
 ```
 
 ### 响应式布局
-实现响应式布局，根据需求可设置四个参数：`pad`、`narrow-pc`、`pc` 和 `large-pc`，而 `span` 是作为 `phone` 默认参数。
+实现响应式布局，根据需求可设置四个参数：`ipad`、`narrow-pc`、`pc` 和 `wide-pc`，而 `span` 是作为 `phone` 默认参数。
 
 <ClientOnly>
   <grid-demo4></grid-demo4>
@@ -65,11 +86,13 @@ title: layout 布局
 ### v-row Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
-name | icon 图标名 | String | — | —
+gutter | 栅格的间隙 | Number, String | — | —
+align | 栅格内容的对齐方向 | String | left, right, center | —
 
 ### v-col Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 span | 栅格所占宽度的默认配置参数 | Number, String | — | —
+offset | 栅格的偏移 | Number, String | — | —
 
 ## Layout 布局
