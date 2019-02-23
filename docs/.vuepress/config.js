@@ -13,7 +13,7 @@ module.exports = {
       '/get-started/',
       {
         title: '组件',
-        children: [ '/components/basic', '/components/layout', '/components/form' ]
+        children: [ '/components/basic', '/components/layout', '/components/form','/components/data', '/components/navigation', '/components/notice', '/components/others' ]
       }
     ]
   },

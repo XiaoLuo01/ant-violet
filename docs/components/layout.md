@@ -1,5 +1,5 @@
 ---
-title: layout 布局
+title: Layout 布局
 ---
 
 ## Grid 栅格
