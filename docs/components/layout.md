@@ -152,3 +152,93 @@ span | 栅格所占宽度的默认配置参数 | Number, String | — | —
 offset | 栅格的偏移 | Number, String | — | —
 
 ## Layout 布局
+
+容器布局，可快速搭建页面的基本结构，需浏览器支持 `flex` 布局。在使用容器布局时，container组件的子组件只能是 `header` ， `main` ， `footer` ， `sider` 或 `container` ，同时，上述子组件的父组件也只能是 `container` 。
+
+### 基础用法
+
+<ClientOnly>
+  <container-demo></container-demo>
+</ClientOnly>
+
+```HTML
+<v-layout>
+  <v-header> 
+    <div class="header-demo demo">Header</div>
+  </v-header>
+  <v-content>
+    <div class="content-demo demo">Content</div>
+  </v-content>
+  <v-footer>
+    <div class="footer-demo demo">Footer</div>
+  </v-footer>
+</v-layout>
+
+<v-layout>
+  <v-header>
+    <div class="header-demo demo">Header</div>
+  </v-header>
+  <v-layout>
+    <v-sider>
+      <div class="sider-demo demo">sider</div>
+    </v-sider>
+    <v-content>
+      <div class="content-demo demo">Content</div>
+    </v-content>
+  </v-layout>
+  <v-footer>
+    <div class="footer-demo demo">Footer</div>
+  </v-footer>
+</v-layout>
+
+<v-layout>
+  <v-sider>
+    <div class="sider-demo sider-demo1 demo">sider</div>
+  </v-sider>
+
+  <v-layout>
+    <v-header>
+      <div class="header-demo demo">Header</div>
+    </v-header>
+    <v-layout>
+      <v-sider>
+        <div class="sider-demo demo">sider</div>
+      </v-sider>
+      <v-content>
+        <div class="content-demo demo">Content</div>
+      </v-content>
+    </v-layout>
+    <v-footer>
+      <div class="footer-demo demo">Footer</div>
+    </v-footer>
+  </v-layout>
+</v-layout>
+```
+
+```CSS
+.demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-demo, .footer-demo {
+  height: 50px;
+  background: #7dbcea;
+  color: #fff;
+}
+.content-demo {
+  min-height: 120px;
+  background: rgba(16, 142, 233, 1);
+  color: #fff;
+}
+.sider-demo {
+  background-color: #3ba0e9;
+  min-height: 120px;
+  width: 100px;
+  color: #fff;
+}
+.sider-demo1 {
+  height: 100%;
+  background-color: #5aabe5;
+}
+```
