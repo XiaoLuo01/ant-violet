@@ -95,7 +95,7 @@ export default {
   font-size: $font-size;
   height: $button-height; 
   padding: 0 1em;
-  border-radius: $border-raduis; 
+  border-radius: $border-radius; 
   border: 1px solid $border-color;
   background: $button-bg;
   display: inline-flex; 

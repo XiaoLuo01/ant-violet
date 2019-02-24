@@ -35,12 +35,12 @@ export default {
             margin-left: -1px;
         }
         &:first-child {
-            border-top-left-radius: $border-raduis;
-            border-bottom-left-radius: $border-raduis;
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
         }
         &:last-child {
-            border-top-right-radius: $border-raduis;
-            border-bottom-right-radius: $border-raduis;
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
         }
         &:hover {
             position: relative;

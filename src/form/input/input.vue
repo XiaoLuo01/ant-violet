@@ -82,7 +82,7 @@ export default {
   > input {
     height: $input-height;
     border: 1px solid $border-color;
-    border-radius: $border-raduis;
+    border-radius: $border-radius;
     padding: 0 8px;
     font-size: inherit;
     &:hover, &:focus {
