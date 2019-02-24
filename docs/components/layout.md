@@ -5,7 +5,7 @@ title: Layout 布局
 ## Grid 栅格
 通过基础的24格分栏，快速构建网页布局。
 
-### 基础用法
+### 基础用法:
 `<v-row>` 行，`<v-col>` 列，通过 `span` 属性设置每一格的宽度，所有列（`<v-col>`）必须放在 `<v-row>` 内。
 
 <ClientOnly>
@@ -32,7 +32,7 @@ title: Layout 布局
 </v-row>
 ```
 
-### 区块间隔
+### 区块间隔:
 栅格常常需要和间隔进行配合，你可以使用 `<v-row>` 的 `gutter` 属性
 
 <ClientOnly>
@@ -52,7 +52,7 @@ title: Layout 布局
 </v-row>
 ```
 
-### 左右偏移
+### 左右偏移:
 `offset` 属性可设置偏移的格子数。
 
 <ClientOnly>
@@ -73,7 +73,7 @@ title: Layout 布局
 </v-row>
 ```
 
-### 响应式布局
+### 响应式布局:
 实现响应式布局，根据需求可设置四个参数：`ipad`、`narrow-pc`、`pc` 和 `wide-pc`，而 `span` 是作为 `phone` 默认参数。
 
 <ClientOnly>
@@ -155,7 +155,7 @@ offset | 栅格的偏移 | Number, String | — | —
 
 容器布局，可快速搭建页面的基本结构，需浏览器支持 `flex` 布局。在使用容器布局时，container组件的子组件只能是 `header` ， `main` ， `footer` ， `sider` 或 `container` ，同时，上述子组件的父组件也只能是 `container` 。
 
-### 基础用法
+### 基础用法:
 
 <ClientOnly>
   <container-demo></container-demo>

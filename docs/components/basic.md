@@ -5,7 +5,7 @@ title: Basic 通用
 ## Icon - 图标
 提供一些常用图标集合。
 
-### 使用方法
+### 使用方法:
 
 <ClientOnly>
   <icon-demo1></icon-demo1>
@@ -24,7 +24,7 @@ title: Basic 通用
 name | icon 图标名 | String | — | —
 
 
-### 图标集合
+### 图标集合:
 <ClientOnly>
   <icon-demo2></icon-demo2>
 </ClientOnly>
@@ -46,7 +46,7 @@ name | icon 图标名 | String | — | —
 <v-button disabled>Disabled</v-button>
 ```
 
-### 图标按钮、加载按钮
+### 图标按钮、加载按钮:
 
 <ClientOnly>
   <button-demo2></button-demo2>
