@@ -16,7 +16,6 @@ export default {
   },
   mounted() {
     this.$children.forEach((vm) => {
-      console.log(vm.$options)
       if(vm.$options.name === 'vSider') {
         this.layoutCls.hasSider = true;
       }
