@@ -1,15 +1,21 @@
 <template>
   <div class="v-collapse-item">
-    <div class="title" @click="toggle" :data-name="name">
-      {{title}}
+    <div class="title" @click="toggle" :data-name="name" :class="{selected:open}">
+      <v-icon name='v-arrow-right' class="v-icon"></v-icon>
+      <div>{{title}}</div>
     </div>
-    <div class="content" v-if="open">
-      <slot></slot>
-    </div>
+    <v-collaspe-transition :visible="open">
+      <div class="collapse-content">
+        <slot></slot>
+      </div>
+    </v-collaspe-transition>
+    
   </div>
 </template>
 
 <script>
+import CollaspeTransition from "../../others/collapse-transition/collapse-transition";
+import vIcon from "../../basic/icon/icon";
 export default {
   name: 'vCollapseItem',
   data() {
@@ -18,6 +24,10 @@ export default {
     }
   },
   inject: ['eventBus'],
+  components: { 
+    'v-collaspe-transition' : CollaspeTransition, 
+    'v-icon': vIcon 
+  },
   props: {
     title: {
       type: String,
@@ -58,10 +68,24 @@ export default {
     border: 1px solid $collapse-border;
     background: $collapse-bg;
     display: flex;
+    align-items: center;
     padding: 12px 8px;
     margin-top: -1px;
     margin-left: -1px;
     margin-right: -1px;
+    >.v-icon {
+      margin-right: 10px;
+      margin-left: 8px;
+      width: 16px;
+      height: 16px;
+      transition: transform .3s;
+      fill: #999;
+    }
+    &.selected {
+      >.v-icon {
+        transform: rotateZ(90deg);
+      }
+    }
   }
   &:first-child {
     > .title {
@@ -76,7 +100,7 @@ export default {
       border-bottom-right-radius: $border-radius;
     }
   }
-  > .content {
+  .collapse-content {
     padding: 16px;
   }
 }
