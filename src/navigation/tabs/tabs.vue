@@ -32,7 +32,8 @@ export default {
     }
   },
   mounted() {
-    
+    // 这里是初始化的时候触发事件, 告诉事件中心 选择了谁
+    this.eventBus.$emit('update:selected', this.selected);
   }
 }
 </script>

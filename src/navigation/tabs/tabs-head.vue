@@ -1,7 +1,10 @@
 <template>
   <div class="v-tabs-head">
     <slot></slot>
-    <slot name="actions"></slot>
+    <div class="actions-wrapper">
+      <slot name="actions"></slot>
+    </div>
+    
   </div>
 </template>
 
@@ -15,11 +18,19 @@ export default {
   },
   inject: ['eventBus'],
   mounted() {
-    
+
   }
 }
 </script>
 
 <style scoped lang="scss">
-
+.v-tabs-head {
+  display: flex;
+  height: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  > .actions-wrapper {
+    margin-left: auto;
+  }
+}
 </style>
