@@ -2,10 +2,12 @@
   <div style="margin: 30px 0">
     <v-tabs :selected.sync='selected'>
       <v-tabs-head>
+        <template slot="actions">
+          <v-button>Extra Action</v-button>
+        </template>
         <v-tabs-item name='social'>社会</v-tabs-item>
         <v-tabs-item name='finance'>财经</v-tabs-item>
         <v-tabs-item name='sports'>体育</v-tabs-item>
-        <v-tabs-item name='' disabled>禁用</v-tabs-item>
       </v-tabs-head>
       <v-tabs-body>
         <v-tabs-pane name='social'>
@@ -34,6 +36,7 @@ import TabsHead from "../../../src/navigation/tabs/tabs-head";
 import TabsItem from "../../../src/navigation/tabs/tabs-item";
 import TabsBody from "../../../src/navigation/tabs/tabs-body";
 import TabsPane from "../../../src/navigation/tabs/tabs-pane";
+import Button from "../../../src/basic/button/button";
 export default {
   name: "",
   data() {
@@ -46,7 +49,8 @@ export default {
     'v-tabs-head': TabsHead,
     'v-tabs-item': TabsItem,
     'v-tabs-body': TabsBody,
-    'v-tabs-pane': TabsPane
+    'v-tabs-pane': TabsPane,
+    "v-button": Button
   }
 };
 </script>
