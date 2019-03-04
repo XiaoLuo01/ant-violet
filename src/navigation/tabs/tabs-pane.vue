@@ -1,6 +1,6 @@
 <template>
   <div class="v-tabs-pane">
-
+    <slot></slot>
   </div>
 </template>
 
@@ -11,6 +11,12 @@ export default {
     return {
 
     }
+  },
+  inject: ['eventBus'],
+  mounted() {
+    this.eventBus.$on('update:selected', (name) => {
+      // console.log(name)
+    })
   },
 }
 </script>

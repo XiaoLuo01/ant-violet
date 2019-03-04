@@ -1,6 +1,7 @@
 <template>
   <div class="v-tabs-head">
-
+    <slot></slot>
+    <slot name="actions"></slot>
   </div>
 </template>
 
@@ -12,6 +13,10 @@ export default {
 
     }
   },
+  inject: ['eventBus'],
+  mounted() {
+    
+  }
 }
 </script>
 
