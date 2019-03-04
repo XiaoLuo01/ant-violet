@@ -1,5 +1,5 @@
 <template>
-  <div class="v-tabs-item" @click="xxx" :class="classes">
+  <div class="v-tabs-item" @click="onClick" :class="classes" :data-name="name">
     <slot></slot>
   </div>
 </template>
@@ -32,8 +32,10 @@ export default {
     })
   },
   methods: {
-    xxx() {
-      this.eventBus.$emit('update:selected', this.name)
+    onClick() {
+      // 点击的时候触发 更新 事件
+      this.eventBus && this.eventBus.$emit('update:selected', this.name, this);
+      this.$emit('click', this)
     }
   }
 }
@@ -48,7 +50,8 @@ export default {
   align-items: center;
   cursor: pointer;
   &.active {
-    background: red;
+    font-weight: bold;
+    color: $border-primary-color;
   }
 }
 </style>
