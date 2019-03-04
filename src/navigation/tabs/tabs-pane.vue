@@ -35,5 +35,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.v-tabs-pane {
+  padding: 1em;
+}
 </style>
