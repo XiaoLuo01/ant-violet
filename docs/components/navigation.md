@@ -89,7 +89,6 @@ data() {
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 selected | 当前选中的标签名，可用.sync修饰符绑定，必填 | String | — | —
-direction | 选项卡所在位置 | String | top, right, bottom, left | top
 
 ### v-tabs-head Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
