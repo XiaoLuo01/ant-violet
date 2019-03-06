@@ -33,8 +33,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.button {
+  margin-bottom: 20px;
+}
 .transition-box {
-  margin-top: 20px;
   width: 300px;
   height: 200px;
   border-radius: 4px;
