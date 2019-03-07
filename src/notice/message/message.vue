@@ -2,7 +2,7 @@
   <div class="v-message">
     <v-icon name='v-info' class="v-info"></v-icon>
     <slot></slot>
-    <div @click="onClickClose">
+    <div @click="onClickClose" v-if="closeButton">
       <v-icon name='v-close' class="v-close"></v-icon>
     </div>
   </div>
@@ -15,7 +15,7 @@ export default {
   props: {
     autoClose: {
       type: Boolean,
-      default: false
+      default: true
     },
     autoCloseDelay: {
       type: Number,
@@ -23,7 +23,7 @@ export default {
     },
     closeButton: {
       type: Boolean,
-      default: true
+      default: false
     },
     enableHtml: {
       type: Boolean,
@@ -33,7 +33,7 @@ export default {
       type: String,
       default: "top",
       validator(value) {
-        return ["top", "bottom", "middle"].indexOf(value) >= 0
+        return ["top", "middle"].indexOf(value) >= 0
       }
     }
   },
