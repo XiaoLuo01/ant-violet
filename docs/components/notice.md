@@ -8,7 +8,7 @@ title: Notice 反馈
 
 ### 基础用法:
 
-从顶部出现，3 秒后自动消失。可以添加关闭按钮。也可以设置回调函数。
+从顶部出现，3 秒后自动消失。可以添加关闭按钮。
 
 <ClientOnly>
   <message-demo1></message-demo1>
@@ -35,7 +35,8 @@ Message 组件是以插件的方式引入的，它会为 `Vue.prototype` 添加�
 ### Options
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
-position | 消息提示的位置，默认顶部 | String | top, middle, bottom | top
-autoClose | 消息提示自动关闭的等待时间，默认3秒 | Boolean, Number | — | 3
+position | 消息提示的位置，默认顶部 | String | top, middle | top
+autoClose | 消息提示是否自动关闭，默认关闭 | Boolean | — | true
+autoCloseDelay | 消息提示自动关闭的等待时间，默认3秒 | Number | — | 3
 enableHtml | 消息文本是否支持HTML，默认不支持 | Boolean | — | false
-closeButton | 自定义关闭按钮的文本和回调函数，默认为‘关闭’和'undefined' | Object | — | —
+closeButton | 显示关闭按钮, 默认不显示 | Boolean | — | false
