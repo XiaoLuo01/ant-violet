@@ -1,9 +1,14 @@
 <template>
-  <div class="v-message">
-    <v-icon name='v-info' class="v-info"></v-icon>
-    <slot></slot>
-    <div @click="onClickClose" v-if="closeButton">
-      <v-icon name='v-close' class="v-close"></v-icon>
+  <div class="v-message" :class="toggleClasses">
+    <div class="wrapper" :class="{removeEl: removeElement}">
+      <v-icon name='v-info' class="v-info"></v-icon>
+      <div class="message">
+        <slot v-if="!enableHtml"></slot>
+        <div v-else v-html="$slots.default[0]"></div>
+      </div>
+      <div @click="onClickClose" v-if="closeButton" class="v-close">
+        <v-icon name='v-close'></v-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -39,11 +44,18 @@ export default {
   },
   data() {
     return {
-
+      removeElement: false
     }
   },
   components: {
     'v-icon': Icon
+  },
+  computed: {
+    toggleClasses() {
+      return {
+        [`position-${this.position}`]: true
+      }
+    }
   },
   mounted() {
     this.execAutoClose()
@@ -57,8 +69,13 @@ export default {
       }
     },
     close() {
-      this.$el.remove()
-      this.$destroy()
+      // 移除之前添加动画
+      this.removeElement = true
+      setTimeout(() => {
+        this.$el.remove()
+        this.$emit('close')
+        this.$destroy()
+      }, 500)
     },
     onClickClose() {
       this.close()
@@ -68,20 +85,52 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$animation-duration: 500ms;
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-200%)
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%)
+  }
+}
+@keyframes slide-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0%)
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200%)
+  }
+}
+@keyframes fade-up {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .v-message {
-  min-width: 380px;
-  border-radius: $border-radius;
   position: fixed;
   left: 50%;
   top: 20px;
   transform: translateX(-50%);
-  background: #edf2fc;
-  display: flex;
-  align-items: center;
-  padding: 15px 15px 15px 20px;
-  z-index: 100;
-  color: #909399;
-  font-size: 14px;
+  z-index: 200;
+  .wrapper {
+    min-width: 380px;
+    border-radius: $border-radius;
+    display: flex;
+    background: #edf2fc;
+    display: flex;
+    align-items: center;
+    padding: 15px 15px 15px 20px;
+    color: #909399;
+    font-size: 14px;
+  }
   .v-info {
     width: 16px;
     height: 16px;
@@ -93,11 +142,33 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
-    width: 16px;
-    height: 16px;
-    fill: #c0c4cc;
-    cursor: pointer;
+    right: 20px;
+    > .v-icon {
+      width: 16px;
+      height: 16px;
+      fill: #c0c4cc;
+      cursor: pointer;
+      margin: 0;
+    }
+  }
+  &.position-top {
+    top: 20px;
+    .wrapper {
+      animation: slide-down $animation-duration;
+    }
+    .removeEl {
+      animation: slide-up $animation-duration;
+    }
+  }
+  &.position-middle {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    .wrapper {
+      animation: slide-down $animation-duration;
+    }
+    .removeEl {
+      animation: slide-up $animation-duration;
+    }
   }
 }
 </style>
