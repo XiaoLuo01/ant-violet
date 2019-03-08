@@ -27,7 +27,9 @@ export default {
       this.$message('你的智商需要充值')
     },
     showMessage2() {
-      this.$message('你的智商需要充值')
+      this.$message('你的智商需要充值', {
+        position: 'middle'
+      })
     },
     showMessage3() {
       this.$message('这是一条不会自动关闭的提示', {
