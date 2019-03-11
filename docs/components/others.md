@@ -2,7 +2,7 @@
 title: Others 其他
 ---
 
-##  popover 弹出框
+##  popover - 弹出框
 
 常用于展示鼠标 `hover` 或者 `click` 时的提示信息。
 
@@ -78,7 +78,7 @@ position | 弹出框的位置，默认顶部 | String | top, right, bottom, left
 trigger | 弹出框的触发方式，默认点击触发 | String | click, hover | click
 
 
-##  collapse-transition 动画
+##  collapse-transition - 动画
 
 用于提供水平和垂直方向展开收起动画功能的小组件。
 

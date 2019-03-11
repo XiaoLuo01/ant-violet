@@ -2,7 +2,7 @@
 title: Data 数据展示
 ---
 
-## Collapse 折叠面板
+## Collapse - 折叠面板
 
 可以折叠/展开的内容区域。
 

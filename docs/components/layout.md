@@ -2,7 +2,7 @@
 title: Layout 布局
 ---
 
-## Grid 栅格
+## Grid - 栅格
 通过基础的24格分栏，快速构建网页布局。
 
 ### 基础用法:
@@ -151,7 +151,7 @@ align | 栅格内容的对齐方向 | String | left, right, center | —
 span | 栅格所占宽度的默认配置参数 | Number, String | — | —
 offset | 栅格的偏移 | Number, String | — | —
 
-## Layout 布局
+## Layout - 布局
 
 容器布局，可快速搭建页面的基本结构，需浏览器支持 `flex` 布局。在使用容器布局时，container组件的子组件只能是 `header` ， `main` ， `footer` ， `sider` 或 `container` ，同时，上述子组件的父组件也只能是 `container` 。
 

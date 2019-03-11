@@ -49,3 +49,24 @@ placeholder | 占位文本 | String | — | —
 disabled | 禁止输入状态 | Boolean | — | false
 error | 错误状态，提示错误信息 | String | — | —
 icon | 输入框头部图标 | String | — | —
+
+## Cascader - 级联选择器
+
+- 从一组相关联的数据集合中进行选择，常用于省市区、公司级层、事务分类等。
+- 级联选择器对数据有较严格要求，每个数据为一个对象，具有  `value`、`lable`和`children`属性，子集为`children`，以此类推。
+- `selected`为当前选中数据`value`值组成的数组，比如 ['北京市', '市辖区', '东城区'] ，按照层级次序排序，使用`.sync`进行绑定。
+
+### 使用方法:
+
+<ClientOnly>
+  <cascader-demo></cascader-demo>
+</ClientOnly>
+
+```HTML
+```
+
+### Attributes
+
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+value | 绑定的值，可使用 v-model 双向绑定 | String | — | false
