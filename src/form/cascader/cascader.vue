@@ -1,6 +1,11 @@
 <template>
   <div class="v-cascader">
-
+    <div class="trigger">
+      <slot></slot>
+    </div>
+    <div class="popover">
+      
+    </div>
   </div>
 </template>
 
