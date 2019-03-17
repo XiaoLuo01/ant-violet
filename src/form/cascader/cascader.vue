@@ -4,7 +4,7 @@
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
     <v-collaspe-transition class="popover-wrapper" :visible="popoverVisible">
-      <cascader-items></cascader-items>
+      <cascader-items class="popover" :items="options" :height="popoverHeight"></cascader-items>
     </v-collaspe-transition>
   </div>
 </template>
@@ -15,6 +15,14 @@ import CascaderItems from './cascader-items';
 import CollaspeTransition from "../../others/collapse-transition/collapse-transition";
 export default {
   name: 'vCascader',
+  props: {
+    options: {
+      type: Array
+    },
+    popoverHeight: {
+      type: String
+    }
+  },
   data() {
     return {
       popoverVisible: false,
@@ -62,6 +70,7 @@ export default {
   }
   > .popover-wrapper {
     position: absolute;
+    border: 1px solid #e4e7ed;
     top: 100%;
     left: 0;
     z-index: 99;
