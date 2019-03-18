@@ -1,6 +1,7 @@
 <template>
   <div class="v-cascader">
     <div class="trigger" :class="{ active: popoverVisible }" @click="popoverVisible = !popoverVisible">
+      <div class="result" :class="{ placeholder: selected.length <= 0 }">{{result}}</div>
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
     <v-collaspe-transition class="popover-wrapper" :visible="popoverVisible">
@@ -38,6 +39,16 @@ export default {
     'v-icon': vIcon,
     CascaderItems
   },
+  computed: {
+    result() {
+      if (this.selected.length > 0) {
+        return this.selected.map(item => item.name).join(' / ')
+      } else {
+        return '请选择'
+      }
+      
+    }
+  },
   methods: {
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected)
@@ -73,6 +84,12 @@ export default {
       margin-right: 10px;
       fill: #c0c4cc;
       transition: all .3s;
+    }
+    > .result {
+      font-size: 14px;
+      &.placeholder {
+        color: #c0c4cc;
+      }
     }
   }
   > .popover-wrapper {

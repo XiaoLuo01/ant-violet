@@ -54,6 +54,7 @@ export default {
     onClickLabel(item, index) {
       let copyItem = JSON.parse(JSON.stringify(this.selected));
       copyItem[this.level] = item;
+      copyItem.splice(this.level + 1) // 把后面的删除
       this.$emit('update:selected', copyItem);
 
       this.selectedIndex = index;
