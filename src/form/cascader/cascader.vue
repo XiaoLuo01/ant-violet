@@ -4,7 +4,7 @@
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
     <v-collaspe-transition class="popover-wrapper" :visible="popoverVisible">
-      <cascader-items class="popover" :items="options" :height="popoverHeight"></cascader-items>
+      <cascader-items class="popover" :items="source" :height="popoverHeight" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
     </v-collaspe-transition>
   </div>
 </template>
@@ -16,11 +16,15 @@ import CollaspeTransition from "../../others/collapse-transition/collapse-transi
 export default {
   name: 'vCascader',
   props: {
-    options: {
+    source: {
       type: Array
     },
     popoverHeight: {
       type: String
+    },
+    selected: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -35,6 +39,9 @@ export default {
     CascaderItems
   },
   methods: {
+    onUpdateSelected(newSelected) {
+      this.$emit('update:selected', newSelected)
+    }
   }
 }
 </script>
