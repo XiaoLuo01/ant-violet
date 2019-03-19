@@ -50,6 +50,9 @@ export default {
       }
     }
   },
+  updated() {
+
+  },
   methods: {
     onClickLabel(item, index) {
       let copyItem = JSON.parse(JSON.stringify(this.selected));
@@ -76,7 +79,8 @@ export default {
   .left {
     min-width: 111px;
     height: 100%;
-    margin: .3em 0;
+    padding: 0.3em 0;
+    box-sizing: border-box;
     overflow: auto;
   }
   .right {

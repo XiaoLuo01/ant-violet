@@ -26,6 +26,9 @@ export default {
     selected: {
       type: Array,
       default: () => []
+    },
+    loadData: {
+      type: Function
     }
   },
   data() {
@@ -46,12 +49,52 @@ export default {
       } else {
         return '请选择'
       }
-      
     }
   },
   methods: {
     onUpdateSelected(newSelected) {
-      this.$emit('update:selected', newSelected)
+      this.$emit('update:selected', newSelected);
+      // 找到最后选择的那一项
+      let lastItem = newSelected[newSelected.length - 1]
+      let simplest = (children,id) => {
+        return children.filter(item => item.id === id)[0]
+      }
+      let complex = (children,id) => {
+        let noChildren = []
+        let hasChildren = []
+        children.forEach(val => {
+          if (val.children) {
+            hasChildren.push(val)
+          } else {
+            noChildren.push(val)
+          }
+        });
+        let found = simplest(noChildren, id)
+        if (found) {
+          return found
+        } else {
+          found = simplest(hasChildren, id)
+          if (found) {
+            return found
+          } else {
+            for(let i = 0; i < hasChildren.length; i++) {
+              found = complex(hasChildren[i].children, id)
+              if (found) {
+                return found
+              }
+            }
+            return undefined
+          }
+        }
+      }
+      let updateSource = (res) => {
+        let copy = JSON.parse(JSON.stringify(this.source));
+        let toUpdate = complex(copy, lastItem.id)
+        toUpdate.children = res
+        this.$emit('update:source', copy)
+      }
+      // 回调:把别人传给我的函数调用一下
+      this.loadData(lastItem, updateSource)
     }
   }
 }
