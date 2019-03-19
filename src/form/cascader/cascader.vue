@@ -1,6 +1,6 @@
 <template>
-  <div class="v-cascader">
-    <div class="trigger" :class="{ active: popoverVisible }" @click="popoverVisible = !popoverVisible">
+  <div class="v-cascader" ref="cascader">
+    <div class="trigger" :class="{ active: popoverVisible }" @click="toggle">
       <div class="result" :class="{ placeholder: selected.length <= 0 }">{{result}}</div>
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
@@ -33,8 +33,7 @@ export default {
   },
   data() {
     return {
-      popoverVisible: false,
-      isActive: false,
+      popoverVisible: false
     }
   },
   components: { 
@@ -52,6 +51,29 @@ export default {
     }
   },
   methods: {
+    onClickDocument(e) {
+      if (this.$refs.cascader === e.target || this.$refs.cascader.contains(e.target)) {
+        return
+      }
+      this.close()
+    },
+    open() {
+      this.popoverVisible = true
+      this.$nextTick(() => {
+        document.addEventListener('click', this.onClickDocument)
+      })
+    },
+    close() {
+      this.popoverVisible = false
+      document.removeEventListener('click', this.onClickDocument)
+    },
+    toggle() {
+      if (this.popoverVisible) {
+        this.close()
+      } else {
+        this.open()
+      }
+    },
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
       // 找到最后选择的那一项
