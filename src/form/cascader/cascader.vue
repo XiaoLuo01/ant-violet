@@ -5,7 +5,7 @@
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
     <v-collaspe-transition class="popover-wrapper" :visible="popoverVisible">
-      <cascader-items class="popover" :items="source" :height="popoverHeight" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
+      <cascader-items class="popover" :loadData="loadData" :items="source" :height="popoverHeight" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
     </v-collaspe-transition>
   </div>
 </template>
@@ -94,7 +94,9 @@ export default {
         this.$emit('update:source', copy)
       }
       // 回调:把别人传给我的函数调用一下
-      this.loadData(lastItem, updateSource)
+      if (!lastItem.isLeaf) { // 不是一个叶子才加载数据
+        this.loadData && this.loadData(lastItem, updateSource)
+      }
     }
   }
 }

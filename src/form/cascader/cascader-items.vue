@@ -3,11 +3,11 @@
     <div class="left">
       <div class="label" v-for="(item, index) in items" :key="index" @click="onClickLabel(item, index)" :class="{selected: selectedIndex === index}">
         {{item.name}}
-        <v-icon class="icon" v-if="item.children" name="v-arrow-right"></v-icon>
+        <v-icon class="icon" v-if="rightArrowVisible(item)" name="v-arrow-right"></v-icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <v-cascader-items :items="rightItems" :height="height" :level="level+1" :selected="selected" @update:selected="onUpdateSelected"></v-cascader-items>
+      <v-cascader-items :items="rightItems" :height="height" :level="level+1" :selected="selected" :loadData="loadData" @update:selected="onUpdateSelected"></v-cascader-items>
     </div>
   </div>
 </template>
@@ -30,6 +30,10 @@ export default {
     level: {
       type: Number,
       default: 0
+    },
+    // 定义是否动态获取
+    loadData: {
+      type: Function
     }
   },
   data() {
@@ -51,10 +55,10 @@ export default {
       }
     }
   },
-  updated() {
-
-  },
   methods: {
+    rightArrowVisible(item) {
+      return this.loadData ? (!item.isLeaf): item.children
+    },
     onClickLabel(item, index) {
       let copyItem = JSON.parse(JSON.stringify(this.selected));
       copyItem[this.level] = item;
@@ -78,7 +82,7 @@ export default {
   justify-content: flex-start;
   height: 150px;
   .left {
-    min-width: 111px;
+    min-width: 118px;
     height: 100%;
     padding: 0.3em 0;
     box-sizing: border-box;
