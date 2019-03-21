@@ -5,7 +5,7 @@
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
     </div>
     <v-collaspe-transition class="popover-wrapper" :visible="popoverVisible">
-      <cascader-items class="popover" :loadData="loadData" :items="source" :height="popoverHeight" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
+      <cascader-items class="popover" :loadData="loadData" :items="source" :height="popoverHeight" :selected="selected" :loading-item="loadingItem" @update:selected="onUpdateSelected"></cascader-items>
     </v-collaspe-transition>
   </div>
 </template>
@@ -35,7 +35,8 @@ export default {
   directives: {ClickOutside},
   data() {
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      loadingItem: {}
     }
   },
   components: { 
@@ -102,14 +103,17 @@ export default {
         }
       }
       let updateSource = (res) => {
+        this.loadingItem = {}
         let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id)
         toUpdate.children = res
         this.$emit('update:source', copy)
       }
       // 回调:把别人传给我的函数调用一下
-      if (!lastItem.isLeaf) { // 不是一个叶子才加载数据
-        this.loadData && this.loadData(lastItem, updateSource)
+      if (!lastItem.isLeaf && this.loadData) { // 不是一个叶子才加载数据
+        this.loadData(lastItem, updateSource)
+        // 找到正在loading的节点
+        this.loadingItem = lastItem
       }
     }
   }
@@ -156,7 +160,7 @@ export default {
     border: 1px solid #e4e7ed;
     top: 100%;
     left: 0;
-    z-index: 99;
+    z-index: 10;
     background: #fff;
     display: flex;
     @extend .box-shadow;

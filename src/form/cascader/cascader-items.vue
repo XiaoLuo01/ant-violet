@@ -3,11 +3,16 @@
     <div class="left">
       <div class="label" v-for="(item, index) in items" :key="index" @click="onClickLabel(item, index)" :class="{selected: selectedIndex === index}">
         {{item.name}}
-        <v-icon class="icon" v-if="rightArrowVisible(item)" name="v-arrow-right"></v-icon>
+        <template v-if="item.name === loadingItem.name">
+          <v-icon class="icon loading" name="v-loading"></v-icon>
+        </template>
+        <template v-else>
+          <v-icon class="icon" v-if="rightArrowVisible(item)" name="v-arrow-right"></v-icon>
+        </template>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <v-cascader-items :items="rightItems" :height="height" :level="level+1" :selected="selected" :loadData="loadData" @update:selected="onUpdateSelected"></v-cascader-items>
+      <v-cascader-items :items="rightItems" :height="height" :level="level+1" :selected="selected" :loadData="loadData" :loading-item="loadingItem" @update:selected="onUpdateSelected"></v-cascader-items>
     </div>
   </div>
 </template>
@@ -34,6 +39,10 @@ export default {
     // 定义是否动态获取
     loadData: {
       type: Function
+    },
+    loadingItem: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -114,6 +123,10 @@ export default {
       width: 12px;
       fill: #bfcbd9;
     }
+    .loading {
+      animation: spin 2s infinite linear;
+    }
   }
 }
+
 </style>
