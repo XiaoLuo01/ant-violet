@@ -114,6 +114,13 @@ export default {
         this.loadData(lastItem, updateSource)
         // 找到正在loading的节点
         this.loadingItem = lastItem
+      } else if(lastItem.isLeaf && this.loadData) {
+        this.close()
+      }
+
+      // 静态加载时, 在最后节点关闭
+      if (!lastItem.children && !this.loadData) {
+        this.close()
       }
     }
   }
