@@ -1,5 +1,5 @@
 <template>
-  <div class="v-cascader" ref="cascader">
+  <div class="v-cascader" ref="cascader" v-click-outside="close">
     <div class="trigger" :class="{ active: popoverVisible }" @click="toggle">
       <div class="result" :class="{ placeholder: selected.length <= 0 }">{{result}}</div>
       <v-icon name='v-arrow-right' class="v-icon"></v-icon>
@@ -14,6 +14,7 @@
 import vIcon from "../../basic/icon/icon";
 import CascaderItems from './cascader-items';
 import CollaspeTransition from "../../others/collapse-transition/collapse-transition";
+import ClickOutside from './../../directive/click-outside'
 export default {
   name: 'vCascader',
   props: {
@@ -31,6 +32,7 @@ export default {
       type: Function
     }
   },
+  directives: {ClickOutside},
   data() {
     return {
       popoverVisible: false
@@ -51,21 +53,11 @@ export default {
     }
   },
   methods: {
-    onClickDocument(e) {
-      if (this.$refs.cascader === e.target || this.$refs.cascader.contains(e.target)) {
-        return
-      }
-      this.close()
-    },
     open() {
       this.popoverVisible = true
-      this.$nextTick(() => {
-        document.addEventListener('click', this.onClickDocument)
-      })
     },
     close() {
       this.popoverVisible = false
-      document.removeEventListener('click', this.onClickDocument)
     },
     toggle() {
       if (this.popoverVisible) {
