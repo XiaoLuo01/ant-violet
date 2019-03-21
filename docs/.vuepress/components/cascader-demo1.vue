@@ -1,8 +1,15 @@
 <template>
   <div style="margin: 30px 0">
+    <div style="margin-top:-15px">
+      <p class="outside">通知外部: </p>
+      <p class="outside">{{selected && selected[0] && selected[0].name || '空'}} </p>
+      <p class="outside">{{selected && selected[1] && selected[1].name || '空'}}</p>
+      <p class="outside">{{selected && selected[2] && selected[2].name || '空'}}</p>
+    </div>
     <v-cascader
-      :options="source"
+      :source.sync="source"
       popover-height='200px'
+      :selected.sync="selected"
     ></v-cascader>
   </div>
 </template>
@@ -14,6 +21,9 @@ export default {
   name: "",
   data() {
     return {
+      // 被选中
+      selected: [],
+      // 整体数据结构
       source: [
         {
           name: "浙江",
@@ -68,4 +78,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.outside {
+  display: inline-flex;
+  color: #096dd9;
+  font-weight: 700
+}
 </style>
