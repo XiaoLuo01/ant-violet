@@ -17,10 +17,14 @@ export default {
   },
   data() {
     return {
-      visible: false,
       selected: undefined
     }
   },
+  computed: {
+    visible() {
+      return this.selected === this.name
+    }
+  }
 }
 </script>
 
