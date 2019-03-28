@@ -1,5 +1,5 @@
 <template>
-  <div class="v-carousel">
+  <div class="v-carousel" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="v-carousel-window">
       <div class="v-carousel-wrapper">
         <slot></slot>
@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       childrenLength: 0,
-      lastSelectedIndex: undefined
+      lastSelectedIndex: undefined,
+      timerId: undefined
     }
   },
   computed: {
@@ -49,16 +50,27 @@ export default {
   },
   methods: {
     playAutomatically() {
-      let index = this.names.indexOf(this.getSelected())
+      // 防止重复播放
+      if (this.timerId) { return }
       let run = () => {
-        let newIndex = index -1
-        if (newIndex === -1) { newIndex = this.names.length -1 }
-        if (newIndex === this.names.length) { newIndex = 1 }
-        this.select(newIndex)
-        // index++
-        setTimeout(run, 2000)
+        let index = this.names.indexOf(this.getSelected())
+        let newIndex = index + 1
+        if (newIndex === -1) { newIndex = this.names.length + 1 }
+        if (newIndex === this.names.length) { newIndex = 0 }
+        this.select(newIndex) // 告诉外界选中 newIndex
+        this.timerId = setTimeout(run, 2000)
       }
-      // setTimeout(run, 2000)
+      this.timerId = setTimeout(run, 2000)
+    },
+    pause() {
+      window.clearTimeout(this.timerId)
+      this.timerId = undefined
+    },
+    onMouseEnter() {
+      this.pause()
+    },
+    onMouseLeave() {
+      this.playAutomatically()
     },
     getSelected() {
       let first = this.$children[0]
@@ -66,7 +78,14 @@ export default {
     },
     updatedChildren() {
       this.$children.forEach(vm => {
-        vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+        let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+        if (this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0) {
+          reverse = false
+        }
+        if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1 ) {
+          reverse = true
+        }
+        vm.reverse = reverse
         this.$nextTick(() => {
           vm.selected = this.getSelected()
         })
