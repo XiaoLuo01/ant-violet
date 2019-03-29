@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'vCarousel',
+  name: 'vCarouselItem',
   props: {
     name: {
       type: String,

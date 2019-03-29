@@ -13,10 +13,19 @@
     <div class="v-carousel-dots">
       <span v-for="n in childrenLength" :key="'index_' + n" :class="{active : selectedIndex === n-1}" @click="select(n-1)"></span>
     </div>
+    <div class="v-carousel-arrow">
+      <span class="arrow-left" @click="select(selectedIndex -1)">
+        <v-icon name="v-arrow-left"></v-icon>
+      </span>
+      <span class="arrow-right" @click="select(selectedIndex +1)">
+        <v-icon name="v-arrow-right"></v-icon>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import Icon from './../../basic/icon/icon'
 export default {
   name: 'vCarousel',
   props: {
@@ -28,6 +37,7 @@ export default {
       default: true
     }
   },
+  components: {'v-icon': Icon},
   data() {
     return {
       childrenLength: 0,
@@ -42,13 +52,16 @@ export default {
       return index === -1 ? 0:index
     },
     names() {
-      return this.$children.map(vm => vm.name)
+      return this.items.map(vm => vm.name)
+    },
+    items() {
+      return this.$children.filter(vm => vm.$options.name === 'vCarouselItem')
     }
   },
   mounted() {
     this.updatedChildren()
     this.playAutomatically()
-    this.childrenLength = this.$children.length
+    this.childrenLength = this.items.length
   },
   updated() {
     this.updatedChildren()
@@ -76,7 +89,7 @@ export default {
       this.playAutomatically()
     },
     getSelected() {
-      let first = this.$children[0]
+      let first = this.items[0]
       return this.selected || first.name
     },
     onTouchStart(e) {
@@ -106,16 +119,16 @@ export default {
       this.playAutomatically()
     },
     updatedChildren() {
-      this.$children.forEach(vm => {
+      this.items.forEach(vm => {
         let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
-        if (this.timerId) {
-            if (this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0) {
+        // if (this.timerId) {
+            if (this.lastSelectedIndex === this.items.length -1 && this.selectedIndex === 0) {
             reverse = false
           }
-          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1 ) {
+          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.items.length - 1 ) {
             reverse = true
           }
-        }
+        // }
         vm.reverse = reverse
         this.$nextTick(() => {
           vm.selected = this.getSelected()
@@ -159,6 +172,34 @@ export default {
       &.active {
         background: #99a9bf;
       }
+    }
+    
+  }
+  &-arrow {
+    > span {
+      background-color: rgba(31, 45, 61, 0.23);
+      height: 36px;
+      width: 36px;
+      cursor: pointer;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      &.arrow-left {
+        left: 16px;
+      }
+      &.arrow-right {
+        right: 16px;
+      }
+    }
+    .v-icon {
+      margin: 0;
+      fill: #fff;
+      width: 14px;
+      height: 14px;
     }
   }
 }
