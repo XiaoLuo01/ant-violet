@@ -85,3 +85,21 @@ accordion | 是否手风琴模式 | Boolean | — | false
 :-:| :-: | :-: | :-: | :-: 
 name | item 的 name 属性，唯一且必填 | String | — | —
 title | item 的 title 属性，即标题文本 | String | — | —
+
+## Carousel - 走马灯
+
+在有限空间内，循环播放同一类型的图片、文字等内容。
+
+### 基础用法:
+
+<ClientOnly>
+  <carousel-demo></carousel-demo>
+</ClientOnly>
+
+```HTML
+```
+###  Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+name | item 的 name 属性，唯一且必填 | String | — | —
+title | item 的 title 属性，即标题文本 | String | — | —

@@ -49,11 +49,11 @@ export default {
   opacity: 0;
 }
 .carousel-leave-to {
-  transform: translateX(-100%) scale(0.5);
+  transform: translateX(-100%);
   opacity: 0;
 }
 .carousel-leave-to.reverse {
-  transform: translateX(100%) scale(0.5);
+  transform: translateX(100%);
   opacity: 0;
 }
 </style>
