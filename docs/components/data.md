@@ -97,9 +97,33 @@ title | item 的 title 属性，即标题文本 | String | — | —
 </ClientOnly>
 
 ```HTML
+<v-carousel :selected.sync="selected">
+  <v-carousel-item name="1">
+    <div class="box">1</div>
+  </v-carousel-item>
+  <v-carousel-item name="2">
+    <div class="box">2</div>
+  </v-carousel-item>
+  <v-carousel-item name="3">
+    <div class="box">3</div>
+  </v-carousel-item>
+</v-carousel>
 ```
-###  Attributes
+```js
+data() {
+  return {
+    selected: '1'
+  };
+}
+```
+
+
+###  v-carousel Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+selected | 当前选中 item 的 name 。可以用 .sync 修饰符绑定。 | String | — | —
+
+### v-carousel-item Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 name | item 的 name 属性，唯一且必填 | String | — | —
-title | item 的 title 属性，即标题文本 | String | — | —
