@@ -14,10 +14,10 @@
       <span v-for="n in childrenLength" :key="n" :data-index="n -1" :class="{active : selectedIndex === n-1}" @click="select(n-1)"></span>
     </div>
     <div class="v-carousel-arrow">
-      <span class="arrow-left" @click="select(selectedIndex -1)">
+      <span class="arrow-left" @click="select(selectedIndex -1)" data-action="prev">
         <v-icon name="v-arrow-left"></v-icon>
       </span>
-      <span class="arrow-right" @click="select(selectedIndex +1)">
+      <span class="arrow-right" @click="select(selectedIndex +1)" data-action="next">
         <v-icon name="v-arrow-right"></v-icon>
       </span>
     </div>

@@ -134,5 +134,71 @@ describe('Carousel 组件', () => {
       done()
     }, 21) 
   })
+
+  it('可以点击上一张', (done) => {
+    Vue.component('vCarouselItem', CarouselItem)
+    const callback = sinon.fake()
+    const wrapper = mount(Carousel, {
+      propsData: {
+        autoPlay: true,
+        autoPlayDelay: 0.02,
+        selected: '1'
+      },
+      slots: {
+        default: `
+        <v-carousel-item name="1">
+          <div class="box1">1</div>
+        </v-carousel-item>
+        <v-carousel-item name="2">
+          <div class="box2">2</div>
+        </v-carousel-item>
+        <v-carousel-item name="3">
+          <div class="box3">3</div>
+        </v-carousel-item>
+        `
+      },
+      listeners: {
+        'update:selected': callback
+      }
+    })
+    setTimeout(() => {
+      wrapper.find('[data-action="prev"]').trigger('click')
+      expect(callback).to.have.been.calledWith('3')
+      done()
+    }, 21) 
+  })
+
+  it('可以点击上一张', (done) => {
+    Vue.component('vCarouselItem', CarouselItem)
+    const callback = sinon.fake()
+    const wrapper = mount(Carousel, {
+      propsData: {
+        autoPlay: true,
+        autoPlayDelay: 0.02,
+        selected: '1'
+      },
+      slots: {
+        default: `
+        <v-carousel-item name="1">
+          <div class="box1">1</div>
+        </v-carousel-item>
+        <v-carousel-item name="2">
+          <div class="box2">2</div>
+        </v-carousel-item>
+        <v-carousel-item name="3">
+          <div class="box3">3</div>
+        </v-carousel-item>
+        `
+      },
+      listeners: {
+        'update:selected': callback
+      }
+    })
+    setTimeout(() => {
+      wrapper.find('[data-action="next"]').trigger('click')
+      expect(callback).to.have.been.calledWith('2')
+      done()
+    }, 21) 
+  })
   
 })
