@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="v-carousel-dots">
-      <span v-for="n in childrenLength" :key="'index_' + n" :class="{active : selectedIndex === n-1}" @click="select(n-1)"></span>
+      <span v-for="n in childrenLength" :key="n" :data-index="n -1" :class="{active : selectedIndex === n-1}" @click="select(n-1)"></span>
     </div>
     <div class="v-carousel-arrow">
       <span class="arrow-left" @click="select(selectedIndex -1)">
@@ -35,6 +35,10 @@ export default {
     autoPlay: {
       type: Boolean,
       default: true
+    },
+    autoPlayDelay: {
+      type: Number,
+      default: 3
     }
   },
   components: {'v-icon': Icon},
@@ -60,7 +64,9 @@ export default {
   },
   mounted() {
     this.updatedChildren()
-    this.playAutomatically()
+    if (this.autoPlay) {
+      this.playAutomatically()
+    }
     this.childrenLength = this.items.length
   },
   updated() {
@@ -74,9 +80,9 @@ export default {
         let index = this.names.indexOf(this.getSelected())
         let newIndex = index + 1
         this.select(newIndex) // 告诉外界选中 newIndex
-        this.timerId = setTimeout(run, 2000)
+        this.timerId = setTimeout(run, this.autoPlayDelay * 1000)
       }
-      this.timerId = setTimeout(run, 2000)
+      this.timerId = setTimeout(run, this.autoPlayDelay * 1000)
     },
     pause() {
       window.clearTimeout(this.timerId)
