@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'vNavMenuItem',
+  inject: ['root'],
   props: {
     name: {
       type: String,
@@ -17,6 +18,10 @@ export default {
     return {
       selected: false
     }
+  },
+  mounted() {
+    // 每一个 items 都注入一个 父组件, 然后调用父组件的方法, 把自己的实例转递给父组件
+    this.root.addItem(this)
   },
   methods: {
     onClick() {

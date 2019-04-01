@@ -7,6 +7,11 @@
 <script>
 export default {
   name: 'vNavMenu',
+  provide() {
+    return {
+      root: this
+    }
+  },
   props: {
     selected: {
       type: Array,
@@ -19,7 +24,7 @@ export default {
   },
   data() {
     return {
-
+      items: []
     }
   },
   mounted() {
@@ -29,12 +34,10 @@ export default {
   updated() {
     this.updateChilren()
   },
-  computed: {
-    items() {
-      return this.$children.filter(vm => vm.$options.name === 'vNavMenuItem')
-    }
-  },
   methods: {
+    addItem(vm) {
+      this.items.push(vm)
+    },
     updateChilren() {
       this.items.forEach(vm => {
         if (this.selected.indexOf(vm.name) >= 0) {
