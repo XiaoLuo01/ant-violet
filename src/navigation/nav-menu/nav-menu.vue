@@ -24,7 +24,8 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      namePath: []
     }
   },
   mounted() {

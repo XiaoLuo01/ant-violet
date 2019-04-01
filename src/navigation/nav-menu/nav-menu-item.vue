@@ -25,6 +25,8 @@ export default {
   },
   methods: {
     onClick() {
+      this.root.namePath = []
+      this.$parent.updateNamePath && this.$parent.updateNamePath()
       this.$emit('add:selected', this.name)
     }
   }
@@ -38,6 +40,9 @@ export default {
   &.selected {
     color: #1890ff;
     border-bottom: 2px solid #1890ff;
+  }
+  &:hover {
+    color: #1890ff;
   }
 }
 </style>

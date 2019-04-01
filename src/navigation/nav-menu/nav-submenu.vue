@@ -1,6 +1,6 @@
 <template>
-  <div class="v-nav-submenu">
-    <div class="v-nav-submenu-title" @click="onClick">
+  <div class="v-nav-submenu" v-click-outside="close">
+    <div class="v-nav-submenu-title" @click="onClick" :class="{active}">
       <slot name="title"></slot>
     </div>
     <div class="v-nav-submenu-popover" v-show="open">
@@ -10,16 +10,37 @@
 </template>
 
 <script>
+import ClickOutside from './../../directive/click-outside'
 export default {
   name: 'vNavSubmenu',
+  inject: ['root'],
+  directives: {ClickOutside},
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       open: false
     }
   },
+  computed: {
+    active() {
+      return this.root.namePath.indexOf(this.name) >= 0 ? true: false
+    }
+  },
   methods: {
     onClick() {
       this.open = !this.open
+    },
+    close() {
+      this.open = false
+    },
+    updateNamePath() {
+      this.root.namePath.unshift(this.name)
+      this.$parent.updateNamePath && this.$parent.updateNamePath()
     }
   }
 }
@@ -28,7 +49,6 @@ export default {
 <style scoped lang="scss">
 .v-nav-submenu {
   position: relative;
-  padding: 0 20px;
   cursor: pointer;
   &-popover {
     position: absolute;
@@ -53,11 +73,24 @@ export default {
       border: none;
     }
   }
+  &-title {
+    padding: 0 20px;
+    &.active {
+      color: #1890ff;
+      border-bottom: 2px solid #1890ff;
+    }
+  }
 }
 
 .v-nav-submenu .v-nav-submenu .v-nav-submenu-popover {
   top: 0;
   left: 100%;
   margin-left: 8px;
+}
+.v-nav-submenu .v-nav-submenu .v-nav-submenu-title {
+  &.active {
+    color: #1890ff;
+    border-bottom: none;
+  }
 }
 </style>
