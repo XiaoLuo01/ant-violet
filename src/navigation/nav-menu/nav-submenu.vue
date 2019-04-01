@@ -2,6 +2,9 @@
   <div class="v-nav-submenu" v-click-outside="close">
     <div class="v-nav-submenu-title" @click="onClick" :class="{active}">
       <slot name="title"></slot>
+      <v-icon class="v-nav-submenu-icon second" name="v-arrow-right" :class="{open}"></v-icon>
+      <v-icon class="v-nav-submenu-icon first" name="v-arrow-down
+      " :class="{open}"></v-icon>
     </div>
     <div class="v-nav-submenu-popover" v-show="open">
       <slot></slot>
@@ -11,6 +14,7 @@
 
 <script>
 import ClickOutside from './../../directive/click-outside'
+import vIcon from "../../basic/icon/icon";
 export default {
   name: 'vNavSubmenu',
   inject: ['root'],
@@ -21,6 +25,7 @@ export default {
       required: true
     }
   },
+  components: {'v-icon': vIcon},
   data() {
     return {
       open: false
@@ -74,10 +79,27 @@ export default {
     }
   }
   &-title {
-    padding: 0 20px;
+    padding: 0 30px 0 20px;
+    display: flex;
+    align-items: center;
     &.active {
       color: #1890ff;
       border-bottom: 2px solid #1890ff;
+    }
+    .v-nav-submenu-icon {
+      margin: 0;
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      right: 10px;
+      transition: all 0.5s;
+      display: none;
+      &.open {
+        transform: rotate(180deg);
+      }
+      &.first {
+        display: block;
+      }
     }
   }
 }
@@ -91,6 +113,18 @@ export default {
   &.active {
     color: #1890ff;
     border-bottom: none;
+  }
+  .v-nav-submenu-icon {
+    right: 20px;
+    &.second {
+      display: block;
+    }
+    &.first {
+      display: none;
+    }
+    &.open {
+      transform: rotate(180deg);
+    }
   }
 }
 </style>
