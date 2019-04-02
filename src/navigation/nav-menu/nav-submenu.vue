@@ -1,23 +1,27 @@
 <template>
   <div class="v-nav-submenu" v-click-outside="close">
-    <div class="v-nav-submenu-title" @click="onClick" :class="{active}">
+    <div class="v-nav-submenu-title" @click="onClick" :class="{active, vertical}">
       <slot name="title"></slot>
       <v-icon class="v-nav-submenu-icon second" name="v-arrow-right" :class="{open}"></v-icon>
       <v-icon class="v-nav-submenu-icon first" name="v-arrow-down
       " :class="{open}"></v-icon>
     </div>
-    <div class="v-nav-submenu-popover" v-show="open">
-      <slot></slot>
-    </div>
+    
+    <v-collaspe-transition class="popover-wrapper" :visible="open">
+      <div class="v-nav-submenu-popover" :class="{vertical}">
+        <slot></slot>
+      </div>
+    </v-collaspe-transition>
   </div>
 </template>
 
 <script>
 import ClickOutside from './../../directive/click-outside'
 import vIcon from "../../basic/icon/icon";
+import CollaspeTransition from "../../others/collapse-transition/collapse-transition";
 export default {
   name: 'vNavSubmenu',
-  inject: ['root'],
+  inject: ['root', 'vertical'],
   directives: {ClickOutside},
   props: {
     name: {
@@ -25,7 +29,10 @@ export default {
       required: true
     }
   },
-  components: {'v-icon': vIcon},
+  components: {
+    'v-icon': vIcon,
+    'v-collaspe-transition' : CollaspeTransition 
+  },
   data() {
     return {
       open: false
@@ -68,6 +75,16 @@ export default {
     margin-top: 5px;
     border-radius: 2px;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    &.vertical {
+      position: static;
+      border-radius: 0;
+      box-shadow: none;
+      margin-top: 0;
+      padding: 0;
+      padding-left: 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
     .v-nav-menu-item {
       height: 40px;
       line-height: 40px;
@@ -82,6 +99,14 @@ export default {
     padding: 0 30px 0 20px;
     display: flex;
     align-items: center;
+    height: 48px;
+    line-height: 48px;
+    &.vertical {
+      &.active {
+        color: #1890ff;
+        border-bottom: none;
+      }
+    }
     &.active {
       color: #1890ff;
       border-bottom: 2px solid #1890ff;
@@ -108,6 +133,11 @@ export default {
   top: 0;
   left: 100%;
   margin-left: 8px;
+  &.vertical {
+    margin-left: 0;
+    padding-left: 15px;
+    box-sizing: border-box;
+  }
 }
 .v-nav-submenu .v-nav-submenu .v-nav-submenu-title {
   &.active {
@@ -124,6 +154,16 @@ export default {
     }
     &.open {
       transform: rotate(180deg);
+    }
+  }
+  &.vertical {
+    .v-nav-submenu-icon {
+      &.second {
+        display: none;
+      }
+      &.first {
+        display: block;
+      }
     }
   }
 }

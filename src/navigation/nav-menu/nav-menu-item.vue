@@ -35,6 +35,8 @@ export default {
 
 <style scoped lang="scss">
 .v-nav-menu-item {
+  height: 48px;
+  line-height: 48px;
   padding: 0 20px;
   cursor: pointer;
   &.selected {
@@ -43,6 +45,14 @@ export default {
   }
   &:hover {
     color: #1890ff;
+  }
+}
+.vertical {
+  .v-nav-menu-item {
+    &.selected {
+      color: #1890ff;
+      border-bottom: none;
+    }
   }
 }
 </style>
