@@ -1,5 +1,5 @@
 <template>
-  <div class="v-nav-menu-item" :class="{selected}" @click="onClick">
+  <div class="v-nav-menu-item" :class="{selected}" @click="onClick" :data-name='name'>
     <slot></slot>
   </div>
 </template>
