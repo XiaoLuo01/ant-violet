@@ -15,12 +15,7 @@ export default {
   },
   props: {
     selected: {
-      type: Array,
-      default: () => []
-    },
-    multiple: {
-      type: Boolean,
-      default: false
+      type: String
     },
     vertical: {
       type: Boolean,
@@ -46,7 +41,7 @@ export default {
     },
     updateChilren() {
       this.items.forEach(vm => {
-        if (this.selected.indexOf(vm.name) >= 0) {
+        if (this.selected === vm.name) {
           vm.selected = true
         } else {
           vm.selected = false
@@ -55,16 +50,8 @@ export default {
     },
     listenToChildren() {
       this.items.forEach(vm => {
-        vm.$on('add:selected', (name) => {
-          if (this.multiple) {
-            if (this.selected.indexOf(name) < 0) {
-              let copySelected = JSON.parse(JSON.stringify(this.selected))
-              copySelected.push(name)
-              this.$emit('update:selected', copySelected)
-            }
-          } else {
-            this.$emit('update:selected', [name])
-          }
+        vm.$on('update:selected', (name) => {
+          this.$emit('update:selected', name)
         })
       })
     }

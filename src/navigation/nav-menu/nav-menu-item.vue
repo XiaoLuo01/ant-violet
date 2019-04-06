@@ -27,7 +27,7 @@ export default {
     onClick() {
       this.root.namePath = []
       this.$parent.$parent.updateNamePath && this.$parent.$parent.updateNamePath()
-      this.$emit('add:selected', this.name)
+      this.$emit('update:selected', this.name)
     }
   }
 }
