@@ -100,3 +100,83 @@ disabled | head 禁用 | Boolean | — | false
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 name | pane 的名称，必填，且与对应的 head 一致 | Number, String | — | —
+
+## NavMenu - 导航菜单
+为页面和功能提供导航的菜单列表。
+
+### 顶部导航:
+水平的顶部导航菜单。
+
+<ClientOnly>
+  <nav-menu-demo1></nav-menu-demo1>
+</ClientOnly>
+
+```HTML
+<v-nav-menu :selected.sync="selected">
+  <v-nav-menu-item name="home">平台首页</v-nav-menu-item>
+  <v-nav-submenu name="about">
+    <template slot="title">关于公司</template>
+    <v-nav-menu-item name="culture">企业文化</v-nav-menu-item>
+    <v-nav-menu-item name="developers">开发团队</v-nav-menu-item>
+    <v-nav-submenu name="contacts">
+      <template slot="title">联系方式</template>
+      <v-nav-menu-item name="email">邮箱地址</v-nav-menu-item>
+      <v-nav-menu-item name="phone">手机号码</v-nav-menu-item>
+      <v-nav-submenu name='social'>
+        <template slot="title">社交网站</template>
+        <v-nav-menu-item name="website">公司网址</v-nav-menu-item>
+        <v-nav-menu-item name="wechat">微信扫码</v-nav-menu-item>
+      </v-nav-submenu>
+    </v-nav-submenu>
+  </v-nav-submenu>
+  <v-nav-menu-item name="hire">招聘信息</v-nav-menu-item>
+  <v-nav-menu-item name="link">
+    <a href="http://www.baidu.com" target="_blank">跳转百度</a>
+  </v-nav-menu-item>
+</v-nav-menu>
+```
+
+### 纵向导航:
+垂直菜单，子菜单内嵌在菜单区域。
+
+<ClientOnly>
+  <nav-menu-demo2></nav-menu-demo2>
+</ClientOnly>
+
+```HTML
+<v-nav-menu :selected.sync="selected" vertical>
+  <v-nav-menu-item name="home">平台首页</v-nav-menu-item>
+  <v-nav-submenu name="about">
+    <template slot="title">关于公司</template>
+    <v-nav-menu-item name="culture">企业文化</v-nav-menu-item>
+    <v-nav-menu-item name="developers">开发团队</v-nav-menu-item>
+    <v-nav-submenu name="contacts">
+      <template slot="title">联系方式</template>
+      <v-nav-menu-item name="email">邮箱地址</v-nav-menu-item>
+      <v-nav-menu-item name="phone">手机号码</v-nav-menu-item>
+      <v-nav-submenu name='social'>
+        <template slot="title">社交网站</template>
+        <v-nav-menu-item name="website">公司网址</v-nav-menu-item>
+        <v-nav-menu-item name="wechat">微信扫码</v-nav-menu-item>
+      </v-nav-submenu>
+    </v-nav-submenu>
+  </v-nav-submenu>
+  <v-nav-menu-item name="hire">招聘信息</v-nav-menu-item>
+</v-nav-menu>
+```
+
+### v-nav-menu Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+selected | 当前选中的标题，可用.sync修饰符绑定，必填 | String | 必须是 name 中含有的字符串| —
+vertical | 设置竖直方向导航，不设置时默认为横向导航 | Boolean | —| false
+
+### v-nav-submenu Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+name | nav-submenu 的唯一标识, 必填 | String | — | —
+
+### v-nav-menu-item Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+name | nav-menu-item 的唯一标识, 必填 | String | — | —

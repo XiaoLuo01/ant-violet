@@ -122,6 +122,8 @@ data() {
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 selected | 当前选中 item 的 name 。可以用 .sync 修饰符绑定。 | String | — | —
+autoPlay | 是否自动播放 | Boolean | — | true
+autoPlayDelay | 自动播放间隔，以 s 为单位 | Number | — | 3
 
 ### v-carousel-item Attributes
 参数 | 说明 | 类型 | 可选值 | 默认值
