@@ -52,7 +52,7 @@ export default {
     },
     updateNamePath() {
       this.root.namePath.unshift(this.name)
-      this.$parent.updateNamePath && this.$parent.updateNamePath()
+      this.$parent.$parent.updateNamePath && this.$parent.$parent.updateNamePath()
     }
   }
 }
@@ -84,15 +84,7 @@ export default {
       padding-left: 10px;
       box-sizing: border-box;
       width: 100%;
-    }
-    .v-nav-menu-item {
-      height: 40px;
-      line-height: 40px;
-      margin-bottom: 8px;
-    }
-    .v-nav-menu-item.selected {
-      background-color: #e6f7ff;
-      border: none;
+      overflow: hidden;
     }
   }
   &-title {

@@ -26,7 +26,7 @@ export default {
   methods: {
     onClick() {
       this.root.namePath = []
-      this.$parent.updateNamePath && this.$parent.updateNamePath()
+      this.$parent.$parent.updateNamePath && this.$parent.$parent.updateNamePath()
       this.$emit('add:selected', this.name)
     }
   }
@@ -39,6 +39,21 @@ export default {
   line-height: 48px;
   padding: 0 20px;
   cursor: pointer;
+  position: relative;
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: transparent;
+      content: '';
+    }
+  }
   &.selected {
     color: #1890ff;
     border-bottom: 2px solid #1890ff;
@@ -48,6 +63,15 @@ export default {
   }
 }
 .vertical {
+  .v-nav-menu-item {
+    &.selected {
+      color: #1890ff;
+      border-bottom: none;
+    }
+  }
+}
+
+.v-nav-submenu-popover {
   .v-nav-menu-item {
     &.selected {
       color: #1890ff;

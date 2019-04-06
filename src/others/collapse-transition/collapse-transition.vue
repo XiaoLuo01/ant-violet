@@ -9,7 +9,7 @@
   >
     <div
       class="v-collapse-transition"
-      v-if="visible"
+      v-show="visible"
     >
       <slot></slot>
     </div>
