@@ -1,12 +1,12 @@
 import chai, {expect} from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import validator from '@/validator.js'
+import Validator from '@/validator.js'
 chai.use(sinonChai)
 
-describe('validator', () => {
+describe('Validator', () => {
   it('存在', () => {
-    expect(validator).to.exist
+    expect(Validator).to.exist
   })
 
   it('required true 报错', () => {
@@ -17,7 +17,8 @@ describe('validator', () => {
       {key: 'email', required: true}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.required).to.eq('必填')
   })
 
@@ -29,7 +30,8 @@ describe('validator', () => {
       {key: 'email', required: true}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email).to.not.exist
   })
 
@@ -41,7 +43,8 @@ describe('validator', () => {
       {key: 'email', pattern: /^.+@.+$/}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.pattern).to.eq('格式不正确')
   })
 
@@ -53,7 +56,8 @@ describe('validator', () => {
       {key: 'email', pattern: /^.+@.+$/}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email).to.not.exist
   })
 
@@ -65,7 +69,8 @@ describe('validator', () => {
       {key: 'email', pattern: 'email'}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.pattern).to.eq('格式不正确')
   })
 
@@ -77,7 +82,8 @@ describe('validator', () => {
       {key: 'email', pattern: 'email'}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email).to.not.exist
   })
 
@@ -89,7 +95,8 @@ describe('validator', () => {
       {key: 'email', pattern: 'email', required: true}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.required).to.exist
     expect(errors.email.pattern).to.not.exist
   })
@@ -102,7 +109,8 @@ describe('validator', () => {
       {key: 'email', pattern: 'email', minLength: 6}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.minLength).to.exist
     expect(errors.email.pattern).to.exist
   })
@@ -115,7 +123,8 @@ describe('validator', () => {
       {key: 'email', pattern: 'email', maxLength: 10}
     ]
     
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validator(data, rules)
     expect(errors.email.maxLength).to.exist
   })
 
@@ -128,7 +137,8 @@ describe('validator', () => {
     ]
 
     let fn = () => {
-      validator(data, rules)
+      let validator = new Validator()
+      errors = validator.validator(data, rules)
     } 
     expect(fn).to.throw('不存在的校验器: hasNumber')
     expect(errors.email.required).to.exist
@@ -136,10 +146,11 @@ describe('validator', () => {
     expect(errors.email.maxLength).to.exist
   })
 
-  it('test 2', () => {
+  it('自定义测试规则 hasNumber', () => {
     let data = {
       email: 'aaassdfffgasgfdsg'
     }
+    let validator = new Validator()
     validator.hasNumber = (value) => {
       if (!/\d/.test(value)) {
         return '必须含有数字'
@@ -150,10 +161,56 @@ describe('validator', () => {
     ]
 
     let fn = () => {
-      errors = validator(data, rules)
+      errors = validator.validator(data, rules)
     } 
     expect(fn).to.not.throw()
     expect(errors.email.hasNumber).to.eq('必须含有数字')
+  })
+
+  it('两个 validator 互相不影响', () => {
+    let data = {
+      email: 'aaassdfffgasgfdsg'
+    }
+    let validator1 = new Validator()
+    let validator2 = new Validator()
+    validator1.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+    let rules = [
+      {key: 'email', required: true, hasNumber: true}
+    ]
+    let errors
+    expect(() => {
+      validator1.validator(data, rules)
+    }).to.not.throw()
+    expect(() => {
+      validator2.validator(data, rules)
+    }).to.throw()
+  })
+
+  it('可以全局添加新的规则', () => {
+    let data = {
+      email: 'aaassdfffgasgfdsg'
+    }
+    let validator1 = new Validator()
+    let validator2 = new Validator()
+    validator1.add('hasNumber', (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    })
+    let rules = [
+      {key: 'email', required: true, hasNumber: true}
+    ]
+    let errors
+    expect(() => {
+      validator1.validator(data, rules)
+    }).to.not.throw()
+    expect(() => {
+      validator2.validator(data, rules)
+    }).to.not.throw()
   })
 
 })
