@@ -12,32 +12,22 @@ export default function validator(data, rules) {
       }
     }
 
-    if (rule.pattern) {
-      let error = validator.pattern(value, rule.pattern)
-      if (error) {
-        ensureObject(error, rule.key)
-        errors[rule.key].pattern = error
-        return
-      }
-    }
+    let validators = Object.keys(rule).filter(key => key !== 'key' || key !== 'required')
 
-    if (rule.minLength) {
-      let error = validator.pattern(value, rule.minLength)
-      if (error) {
-        ensureObject(error, rule.key)
-        errors[rule.key].minLength = error
-        return
+    // 遍历 validators , 并逐一调用对应的函数
+    validators.forEach(validatorKey => {
+      // key is minLength / maxLength / hasNumber
+      if (validator[validatorKey]) {
+        let error =  validator[validatorKey](value, rule[validatorKey])
+        if (error) {
+          ensureObject(error, rule.key)
+          errors[rule.key][validatorKey] = error
+        } else {
+          throw `不存在的校验器: ${validatorKey}`
+        }
       }
-    }
-
-    if (rule.maxLength) {
-      let error = validator.pattern(value, rule.maxLength)
-      if (error) {
-        ensureObject(error, rule.key)
-        errors[rule.key].maxLength = error
-        return
-      }
-    }
+      
+    })
 
   })
 

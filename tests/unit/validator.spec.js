@@ -119,4 +119,41 @@ describe('validator', () => {
     expect(errors.email.maxLength).to.exist
   })
 
+  it('many keys', () => {
+    let data = {
+      email: '123123123123'
+    }
+    let rules = [
+      {key: 'email', required: true, minLength: 6, maxLength: 10, hasNumber: true, hasLowerCaseAndUpperCase: true, hasDot: true, hasUnderscore: true}
+    ]
+
+    let fn = () => {
+      validator(data, rules)
+    } 
+    expect(fn).to.throw('不存在的校验器: hasNumber')
+    expect(errors.email.required).to.exist
+    expect(errors.email.minLength).to.not.exist
+    expect(errors.email.maxLength).to.exist
+  })
+
+  it('test 2', () => {
+    let data = {
+      email: 'aaassdfffgasgfdsg'
+    }
+    validator.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+    let rules = [
+      {key: 'email', required: true, minLength: 6, maxLength: 10, hasNumber: true, hasLowerCaseAndUpperCase: true, hasDot: true, hasUnderscore: true}
+    ]
+
+    let fn = () => {
+      errors = validator(data, rules)
+    } 
+    expect(fn).to.not.throw()
+    expect(errors.email.hasNumber).to.eq('必须含有数字')
+  })
+
 })
