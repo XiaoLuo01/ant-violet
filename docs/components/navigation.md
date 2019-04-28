@@ -180,3 +180,67 @@ name | nav-submenu 的唯一标识, 必填 | String | — | —
 参数 | 说明 | 类型 | 可选值 | 默认值
 :-:| :-: | :-: | :-: | :-: 
 name | nav-menu-item 的唯一标识, 必填 | String | — | —
+
+
+## Pagination - 分页
+当数据量过多时，使用分页分解数据。
+
+### 基础用法:
+页数较少时的效果。
+
+<ClientOnly>
+  <pagination-demo1></pagination-demo1>
+</ClientOnly>
+
+⚠️ *<font color='grey' size="2">当总页数为 `9` 页及以下时，分页器页码按钮会全部显示。</font>*
+
+```HTML
+<v-pagination :total-page='5'
+              :current-page.sync="currentPage"
+></v-pagination>
+```
+```js
+data() {
+  return {
+    currentPage: 1
+  }
+},
+```
+
+### 更多分页:
+页数较多时的效果。
+
+<ClientOnly>
+  <pagination-demo2></pagination-demo2>
+</ClientOnly>
+
+⚠️ *<font color='grey' size="2">当总页数超过 `9` 页时，分页器会隐藏部分页面按钮。</font>*
+
+```HTML
+<v-pagination :total-page='50'
+              :current-page.sync="currentPage"
+></v-pagination>
+```
+
+### 只有一页:
+页数较多时的效果。
+
+<ClientOnly>
+  <pagination-demo3></pagination-demo3>
+</ClientOnly>
+
+⚠️ *<font color='grey' size="2">当总页数仅有 `1` 页时，分页器默认会隐藏。如果需要显示仅有一页的分页器按钮，请设置 `:hideIfOnePage="false"`。</font>*
+
+```HTML
+<v-pagination :total-page='1'
+              :current-page.sync="currentPage"
+              :hide-if-one-page="false"
+></v-pagination>
+```
+
+### v-Pagination Attributes
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+total-page | 总页码数, 必填 | Number | — | —
+current-page | 当前页数，用.sync修饰符绑定，必填 | Number | — | —
+hide-if-one-page | 只有一页时是否隐藏分页器 | Boolean | — | true
