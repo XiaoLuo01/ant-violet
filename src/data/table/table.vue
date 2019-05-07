@@ -5,7 +5,7 @@
         <tr>
           <th class="v-table-selection-column">
             <span class="v-checkbox-inner"></span>
-            <input type="checkbox" class="v-checkbox-input">
+            <input type="checkbox" class="v-checkbox-input" @change="onChangeAllItems" ref="allCheck">
           </th>
           <th v-for="(column, i) in columns" :key="'th_'+i">
             {{column.text}}
@@ -16,7 +16,7 @@
         <tr v-for="(item, index) in dataSource" :key="'tr_'+index">
           <td class="v-table-selection-column">
             <span class="v-checkbox-inner"></span>
-            <input type="checkbox" class="v-checkbox-input" @change="onChangeItem($event, item, index)">
+            <input type="checkbox" class="v-checkbox-input" @change="onChangeItem($event, item, index)" :checked="inSelectedItem(item)">
           </td>
           <template v-for="(column, k) in columns">
             <td  :key="'td_'+k">{{item[column.field]}}</td>
@@ -37,7 +37,10 @@ export default {
     },
     dataSource: {
       type: Array,
-      required: true
+      required: true,
+      validator(array) {
+        return !(array.filter(item => item.id === undefined).length > 0)
+      }
     },
     bordered: {
       type: Boolean,
@@ -50,6 +53,10 @@ export default {
     striped: {
       type: Boolean,
       default: false
+    },
+    selectedItems: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -58,8 +65,33 @@ export default {
     }
   },
   methods: {
+    inSelectedItem(item) {
+      return this.selectedItems.filter(i => i.id === item.id).length > 0
+    },
     onChangeItem(e, item, index) {
-      this.$emit('changeItem', {selected: e.target.checked, item, index})
+      let selected = e.target.checked
+      let copySelectedItems = JSON.parse(JSON.stringify(this.selectedItems))
+      if (selected) {
+        copySelectedItems.push(item)
+      } else {
+        copySelectedItems = copySelectedItems.filter(i => i.id !== item.id)
+      }
+      this.$emit('update:selectedItems', copySelectedItems)
+    },
+    onChangeAllItems(e) {
+      let selected = e.target.checked
+      this.$emit('update:selectedItems', selected ? this.dataSource : [])
+    }
+  },
+  watch: {
+    selectedItems() {
+      if (this.selectedItems.length === this.dataSource.length) {
+        this.$refs.allCheck.indeterminate = false
+      } else if(this.selectedItems.length === 0) {
+        this.$refs.allCheck.indeterminate = false
+      }else {
+        this.$refs.allCheck.indeterminate = true
+      }
     }
   }
 }
