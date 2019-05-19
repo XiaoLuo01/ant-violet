@@ -1,35 +1,35 @@
 <template>
-  <div class="v-table">
-    <table class="v-table-wrapper" :class="{bordered, compact, striped}">
-      <thead class="v-table-thead">
-        <tr>
-          <th class="v-table-selection-column">
-            <span class="v-checkbox-inner"></span>
-            <input type="checkbox" class="v-checkbox-input" @change="onChangeAllItems" ref="allCheck" :checked="areAllItemsSelected">
-          </th>
-          <th v-for="(column, i) in columns" :key="'th_'+i" class=" is-sortable" @click="changeOrderBy(column.field)">
-            <div>
-              {{column.text}}
-              <span v-if="column.field in orderBy" class="caret-wrapper" >
-                <v-icon name='v-caret-top' class="v-icon-top" :class="{active: orderBy[column.field] === 'asc'}"></v-icon>
-                <v-icon name='v-caret-bottom' class="v-icon-bottom" :class="{active: orderBy[column.field] === 'desc'}"></v-icon>
-              </span>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="v-table-tbody">
-        <tr v-for="(item, index) in dataSource" :key="'tr_'+index">
-          <td class="v-table-selection-column">
-            <span class="v-checkbox-inner"></span>
-            <input type="checkbox" class="v-checkbox-input" @change="onChangeItem($event, item, index)" :checked="inSelectedItem(item)">
-          </td>
-          <template v-for="(column, k) in columns">
-            <td  :key="'td_'+k">{{item[column.field]}}</td>
-          </template>
-        </tr>
-      </tbody>
-    </table>
+  <div class="v-table" ref="wrapper">
+    <div :style="{height, overflow: 'auto'}" ref="tableWrapper">
+      <table class="v-table-wrapper" :class="{bordered, compact, striped}" ref="table">
+        <thead class="v-table-thead">
+          <tr>
+            <th class="v-table-selection-column" style="{width: '50px'}">
+              <input type="checkbox" class="v-checkbox-input" @change="onChangeAllItems" ref="allCheck" :checked="areAllItemsSelected">
+            </th>
+            <th v-for="(column, i) in columns" :key="'th_'+i" class=" is-sortable" @click="changeOrderBy(column.field)" :style="{width: column.width + 'px'}">
+              <div>
+                {{column.text}}
+                <span v-if="column.field in orderBy" class="caret-wrapper" >
+                  <v-icon name='v-caret-top' class="v-icon-top" :class="{active: orderBy[column.field] === 'asc'}"></v-icon>
+                  <v-icon name='v-caret-bottom' class="v-icon-bottom" :class="{active: orderBy[column.field] === 'desc'}"></v-icon>
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="v-table-tbody">
+          <tr v-for="(item, index) in dataSource" :key="'tr_'+index">
+            <td class="v-table-selection-column"  style="{width: '50px'}">
+              <input type="checkbox" class="v-checkbox-input" @change="onChangeItem($event, item, index)" :checked="inSelectedItem(item)">
+            </td>
+            <template v-for="(column, k) in columns">
+              <td  :key="'td_'+k" :style="{width: column.width + 'px'}">{{item[column.field]}}</td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- loding -->
     <div v-if="loading" class="v-table-loading">
       <v-icon name="v-loading"></v-icon>
@@ -76,6 +76,9 @@ export default {
     selectedItems: {
       type: Array,
       default: () => []
+    },
+    height: {
+      type: Number
     }
   },
   data() {
@@ -104,6 +107,21 @@ export default {
         }
       return equal
     }
+  },
+  mounted() {
+    // 克隆 dom 节点
+    let table2 = this.$refs.table.cloneNode(false)
+    this.table2 = table2
+    let thead = this.$refs.table.children[0]
+    let {height} = thead.getBoundingClientRect()
+    this.$refs.tableWrapper.style.marginTop = height + 'px'
+    this.$refs.tableWrapper.style.height = this.height - height + 'px'
+    table2.appendChild(thead)
+    table2.classList.add('v-table-copy')
+    this.$refs.wrapper.appendChild(table2)
+  },
+  beforeDestroy() {
+    this.table2.remove()
   },
   methods: {
     changeOrderBy(key) {
@@ -152,10 +170,16 @@ export default {
 
 <style scoped lang="scss">
 .v-table {
+  position: relative;
+  overflow: hidden;
   &-wrapper {
     width: 100%;
     display: table;
     border-collapse: collapse;
+    margin: 0;
+    .v-table-selection-column {
+      width: 28px;
+    }
     &.bordered {
       border: 1px solid #e8e8e8;
     }
@@ -176,6 +200,7 @@ export default {
           color: rgba(0,0,0,0.75);
           text-align: left;
           border-bottom: 1px solid #e8e8e8;
+          // box-sizing: border-box;
         }
       }
     }
@@ -228,8 +253,7 @@ export default {
       }
     }
   }
-  position: relative;
-  
+
   &-loading {
     position: absolute;
     top: 0;
@@ -245,6 +269,13 @@ export default {
       height: 40px;
       @include spin;
     }
+  }
+
+  &-copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
 </style>
