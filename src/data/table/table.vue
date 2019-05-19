@@ -30,6 +30,10 @@
         </tr>
       </tbody>
     </table>
+    <!-- loding -->
+    <div v-if="loading" class="v-table-loading">
+      <v-icon name="v-loading"></v-icon>
+    </div>
   </div>
 </template>
 
@@ -53,6 +57,10 @@ export default {
         return !(array.filter(item => item.id === undefined).length > 0)
       }
     },
+    loading: {
+      type: Boolean,
+      default: false
+    }, 
     bordered: {
       type: Boolean,
       default: false
@@ -220,6 +228,23 @@ export default {
       }
     }
   }
+  position: relative;
   
+  &-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.7);
+    .v-icon {
+      width: 40px;
+      height: 40px;
+      @include spin;
+    }
+  }
 }
 </style>
