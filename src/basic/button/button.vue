@@ -170,7 +170,7 @@ export default {
     }
   }
   .loading {
-    animation: spin 2s infinite linear;
+    @include spin;
   }
   // 动画水纹
   &::after {
