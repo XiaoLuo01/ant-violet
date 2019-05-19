@@ -5,10 +5,16 @@
         <tr>
           <th class="v-table-selection-column">
             <span class="v-checkbox-inner"></span>
-            <input type="checkbox" class="v-checkbox-input" @change="onChangeAllItems" ref="allCheck">
+            <input type="checkbox" class="v-checkbox-input" @change="onChangeAllItems" ref="allCheck" :checked="areAllItemsSelected">
           </th>
-          <th v-for="(column, i) in columns" :key="'th_'+i">
-            {{column.text}}
+          <th v-for="(column, i) in columns" :key="'th_'+i" class=" is-sortable" @click="changeOrderBy(column.field)">
+            <div>
+              {{column.text}}
+              <span v-if="column.field in orderBy" class="caret-wrapper" >
+                <v-icon name='v-caret-top' class="v-icon-top" :class="{active: orderBy[column.field] === 'asc'}"></v-icon>
+                <v-icon name='v-caret-bottom' class="v-icon-bottom" :class="{active: orderBy[column.field] === 'desc'}"></v-icon>
+              </span>
+            </div>
           </th>
         </tr>
       </thead>
@@ -28,12 +34,17 @@
 </template>
 
 <script>
+import vIcon from "../../basic/icon/icon";
 export default {
   name: 'vTable',
   props: {
     columns: {
       type: Array,
       required: true
+    },
+    orderBy: {
+      type: Object,
+      default: () => {}
     },
     dataSource: {
       type: Array,
@@ -64,7 +75,41 @@ export default {
 
     }
   },
+  components: {
+    'v-icon': vIcon
+  },
+  computed: {
+    areAllItemsSelected() {
+      const a = this.dataSource.map(item => item.id).sort()
+      const b = this.selectedItems.map(item => item.id).sort()
+      
+      if (a.length !== b.length) {
+        return false
+      }
+
+      let equal = true
+      for (let i = 0; i< a.length; i++) {
+          if(a[i] !== b[i]) {
+            equal = false
+            break
+          }
+        }
+      return equal
+    }
+  },
   methods: {
+    changeOrderBy(key) {
+      let copy = JSON.parse(JSON.stringify(this.orderBy))
+      let oldValue = copy[key]
+      if (oldValue === 'asc') {
+        copy[key] = 'desc'
+      } else if (oldValue === 'desc') {
+        copy[key] = true
+      } else {
+        copy[key] = 'asc'
+      }
+      this.$emit('update:orderBy', copy)
+    },
     inSelectedItem(item) {
       return this.selectedItems.filter(i => i.id === item.id).length > 0
     },
@@ -142,6 +187,37 @@ export default {
       border: none;
       padding: 16px 16px;
       font-size: 14px;
+    }
+    th.is-sortable {
+      cursor: pointer;
+      user-select: none;
+      div {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .caret-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      width: 18px;
+      vertical-align: middle;
+      cursor: pointer;
+      position: relative;
+      .v-icon {
+        width: 16px;
+        height: 16px;
+        fill: #c0c4cc;
+        &.active {
+          fill: #409eff;
+        }
+      }
+      .v-icon-top {
+        margin-bottom: -5px;
+      }
+      .v-icon-bottom {
+        margin-top: -5px;
+      }
     }
   }
   
