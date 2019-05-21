@@ -1,5 +1,5 @@
 <template>
-  <svg v-if="name" class="v-icon" aria-hidden="true">
+  <svg v-if="name" class="v-icon" aria-hidden="true" @click="$emit('click', $event)">
     <use :xlink:href="`#${name}`"></use>
   </svg>
 </template>
