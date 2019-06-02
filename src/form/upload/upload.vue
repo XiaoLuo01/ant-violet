@@ -46,6 +46,9 @@ export default {
     fileList: {
       type: Array,
       default: () => []
+    },
+    sizeLimit: {
+      type: Number
     }
   },
   components: {
@@ -74,6 +77,7 @@ export default {
       this.$emit('update:fileList', copy)
     },
     createInput() {
+      this.$refs.temp.innerHTML = ''
       // create input 
       let input = document.createElement('input')
       input.type = 'file'
@@ -82,13 +86,19 @@ export default {
     },
     beforeUploadFIle(rawFile, newName) {
       let {size, type} = rawFile
-      this.$emit('update:fileList', [...this.fileList, {name: newName, size, type, status: 'uploading'}])
+      if (size > this.sizeLimit * 1024 * 1024) {
+        this.$emit('error', `文件大于${this.sizeLimit}MB`)
+        return false
+      } else {
+        this.$emit('update:fileList', [...this.fileList, {name: newName, size, type, status: 'uploading'}])
+        return true
+      }
     },
     updateFile(rawFile) {
       let {name, size, type} = rawFile
       let newName = this.generateName(name)
+      if (!this.beforeUploadFIle(rawFile, newName)) {return}
 
-      this.beforeUploadFIle(rawFile, newName)
       let formData = new FormData()
       formData.append(this.name, rawFile)
       
@@ -96,8 +106,8 @@ export default {
         let url = this.parseResponse(response)
         this.url = url
         this.afterUploadFIle(newName, url)
-      }, () => {
-        this.uploadError(newName)
+      }, (xhr) => {
+        this.uploadError(xhr, newName)
       })
     },
     afterUploadFIle(newName, url){
@@ -120,7 +130,7 @@ export default {
       }
       return name
     },
-    uploadError(newName) {
+    uploadError(xhr, newName) {
       let file = this.fileList.filter(f => f.name === newName)[0]
       let fileCopy = JSON.parse(JSON.stringify(file))
       let index = this.fileList.indexOf(file)
@@ -128,13 +138,21 @@ export default {
       let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
       fileListCopy.splice(index, 1, fileCopy)
       this.$emit('update:fileList', fileListCopy)
+
+      let error = ''
+      if (xhr.status === 0) {
+        error = '网络无法连接'
+      }
+      this.$emit('error', error)
     },
     doUpdateFile(formData, success, fail) {
       let xhr = new XMLHttpRequest()
       xhr.open(this.method, this.action)
       xhr.onload = () => {
         success && success(xhr.response)
-        // fail()
+      }
+      xhr.onerror = () => {
+        fail(xhr, xhr.statusCode)
       }
       xhr.send(formData)
     }
