@@ -124,7 +124,7 @@ export default {
       fill: #bfcbd9;
     }
     .loading {
-      animation: spin 2s infinite linear;
+      @include spin;
     }
   }
 }
