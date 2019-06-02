@@ -3,19 +3,27 @@
     <div @click="onClickUpload">
       <slot></slot>
     </div>
-    <div ref="temp" style="display:none;"></div>
-    <!-- <img :src="url" alt=""> -->
     <ol>
       <li v-for="(file, i) in fileList" :key="i">
-        <img :src="file.url" width="48" height="48" alt="">
-        <div class="filename">{{file.name}}</div>
+        <template v-if="file.status === 'uploading'">
+          <v-icon name="v-loading"></v-icon>
+        </template>
+        <template v-else-if="file.type.indexOf('image') === 0">
+          <img :src="file.url" width="48" height="48" alt="">
+        </template>
+        <template v-else>
+          <div class="v-upload-defaultImage"></div>
+        </template>
+        <div class="filename" :class="{[file.status]: file.status}">{{file.name}}</div>
         <i @click="onRemoveFile(file)" class="remove-btn">x</i>
       </li>
     </ol>
+    <div ref="temp" style="display:none;"></div>
   </div>
 </template>
 
 <script>
+import vIcon from "../../basic/icon/icon";
 export default {
   name: 'vUpload',
   props: {
@@ -40,6 +48,9 @@ export default {
       default: () => []
     }
   },
+  components: {
+    vIcon
+  },
   data() {
     return {
       url: 'about:blank'
@@ -50,8 +61,7 @@ export default {
       let input = this.createInput()
       // listen to input
       input.addEventListener('change', () => {
-        let file = input.files[0]
-        this.updateFile(file)
+        this.updateFile(input.files[0])
         input.remove()
       })
       // trigger
@@ -70,21 +80,61 @@ export default {
       this.$refs.temp.appendChild(input)
       return input
     },
-    updateFile(file) {
+    beforeUploadFIle(rawFile, newName) {
+      let {size, type} = rawFile
+      this.$emit('update:fileList', [...this.fileList, {name: newName, size, type, status: 'uploading'}])
+    },
+    updateFile(rawFile) {
+      let {name, size, type} = rawFile
+      let newName = this.generateName(name)
+
+      this.beforeUploadFIle(rawFile, newName)
       let formData = new FormData()
-      formData.append(this.name, file)
-      let {name, size, type} = file
+      formData.append(this.name, rawFile)
+      
       this.doUpdateFile(formData, (response) => {
         let url = this.parseResponse(response)
         this.url = url
-        this.$emit('update:fileList', [...this.fileList, {name, size, type, url}])
+        this.afterUploadFIle(newName, url)
+      }, () => {
+        this.uploadError(newName)
       })
     },
-    doUpdateFile(formData, success) {
+    afterUploadFIle(newName, url){
+      let file = this.fileList.filter(f => f.name === newName)[0]
+      let index = this.fileList.indexOf(file)
+      let copy = JSON.parse(JSON.stringify(file))
+      copy.url = url
+      copy.status = 'success'
+      let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
+      fileListCopy.splice(index, 1, copy)
+      this.$emit('update:fileList', fileListCopy)
+    },
+    generateName(name) {
+      // 设置不同的 filename
+      while( this.fileList.filter(f => f.name === name).length > 0) {
+        let dotIndex = name.lastIndexOf('.')
+        let nameWithoutExtension = name.substring(0, dotIndex)
+        let extension = name.substring(dotIndex)
+        name = nameWithoutExtension + '(1)' + extension
+      }
+      return name
+    },
+    uploadError(newName) {
+      let file = this.fileList.filter(f => f.name === newName)[0]
+      let fileCopy = JSON.parse(JSON.stringify(file))
+      let index = this.fileList.indexOf(file)
+      fileCopy.status = 'fail'
+      let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
+      fileListCopy.splice(index, 1, fileCopy)
+      this.$emit('update:fileList', fileListCopy)
+    },
+    doUpdateFile(formData, success, fail) {
       let xhr = new XMLHttpRequest()
       xhr.open(this.method, this.action)
       xhr.onload = () => {
         success && success(xhr.response)
+        // fail()
       }
       xhr.send(formData)
     }
@@ -109,14 +159,28 @@ export default {
       margin-bottom: 8px;
       .filename {
         margin-left: 8px;
+        color: #1890ff;
+        &.fail {
+          color: #f5222d;
+        }
       }
       .remove-btn {
         position: absolute;
         right: 10px;
         top: 0;
         font-style: normal;
+        cursor: pointer;
+      }
+      .v-icon {
+        margin: 0 10px;
+        @include spin;
       }
     }
+  }
+  &-defaultImage {
+    border: 1px solid #d9d9d9;
+    width: 48px;
+    height: 48px;
   }
 }
 </style>
