@@ -237,3 +237,68 @@ source | 静态数据组成的数组，用 .sync 修饰符绑定 | Array | — |
 selected | 当前选择器选择的数据组成的数组，用 .sync 修饰符绑定 | Array | — | —
 popover-height | 选择器弹出 popover 容器高度设置属性 | String | — | 150px
 :load-data | 设置请求并传入到组件内部的函数 | Function | — | —
+
+
+## Upload - 上传
+文件选择上传和拖拽上传控件。
+
+### 使用方法:
+用户点击按钮弹出文件选择框。
+
+<ClientOnly>
+  <upload-demo1></upload-demo1>
+</ClientOnly>
+
+```HTML
+<v-upload 
+    :accept="accpet" 
+    method="POST" 
+    action="http://127.0.0.1:3000/upload" 
+    name="file" 
+    :parseResponse="parseResponse" 
+    :fileList.sync="fileList" 
+    @error="error" 
+    :size-limit="1">
+  <v-button>点击上传</v-button>
+</v-upload>
+```
+```js
+import Upload from "../../../src/form/upload/upload";
+import Button from "../../../src/basic/button/button";
+export default {
+  name: "",
+  data() {
+    return {
+      fileList: [],
+      accpet: 'image/*'
+    };
+  },
+  methods: {
+    parseResponse(response) {
+      let object = JSON.parse(response)
+      let url = `http://127.0.0.1:3000/preview/${object.id}`
+      return url
+    },
+    error(err) {
+      alert(err || '上传失败')
+    }
+  },
+  components: {
+    "v-upload": Upload,
+    "v-button": Button
+  }
+};
+```
+
+### Attributes
+
+参数 | 说明 | 类型 | 可选值 | 默认值
+:-:| :-: | :-: | :-: | :-: 
+name | 上传的文件字段名 | String | — | file
+method | 上传的请求方式, 默认是 'POST' | String | — | POST
+accept | 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | String | — | —
+parseResponse | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | Function | — | —
+action | 必选参数，上传的地址 | String | — | —
+fileList | 上传的文件列表, 用 .sync 修饰符绑定, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | Array | — | —
+sizeLimit | 设置上传文件的最大尺寸 | String | — | —
+multiple | 是否支持多选文件，ie10+ 支持。开启后按住 ctrl 可选择多个文件 | Boolean | — | false
