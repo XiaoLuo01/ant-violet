@@ -31,11 +31,11 @@ export default {
       type: String,
       required: true
     },
-    method: {
+    action: {
       type: String,
       required: true
     },
-    action: {
+    method: {
       type: String,
       default: 'POST'
     },
@@ -53,6 +53,9 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    accept: {
+      type: String
     }
   },
   components: {
@@ -85,6 +88,7 @@ export default {
       // create input 
       let input = document.createElement('input')
       input.type = 'file'
+      input.accept = this.accept
       input.multiple = this.multiple
       this.$refs.temp.appendChild(input)
       return input
