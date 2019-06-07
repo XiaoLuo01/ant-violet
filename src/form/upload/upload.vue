@@ -49,6 +49,10 @@ export default {
     },
     sizeLimit: {
       type: Number
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -81,7 +85,7 @@ export default {
       // create input 
       let input = document.createElement('input')
       input.type = 'file'
-      input.multiple = true
+      input.multiple = this.multiple
       this.$refs.temp.appendChild(input)
       return input
     },
