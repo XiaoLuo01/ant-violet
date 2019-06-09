@@ -24,6 +24,7 @@
 
 <script>
 import vIcon from "../../basic/icon/icon";
+import http from './../../http'
 export default {
   name: 'vUpload',
   props: {
@@ -146,6 +147,7 @@ export default {
       let fileListCopy = JSON.parse(JSON.stringify(this.fileList))
       fileListCopy.splice(index, 1, copy)
       this.$emit('update:fileList', fileListCopy)
+      this.$emit('uploaded')
     },
     generateName(name) {
       // 设置不同的 filename
@@ -173,15 +175,7 @@ export default {
       this.$emit('error', error)
     },
     doUpdateFiles(formData, success, fail) {
-      let xhr = new XMLHttpRequest()
-      xhr.open(this.method, this.action)
-      xhr.onload = () => {
-        success && success(xhr.response)
-      }
-      xhr.onerror = () => {
-        fail(xhr, xhr.statusCode)
-      }
-      xhr.send(formData)
+      http[this.method.toLowerCase()]( this.action, {success, fail, data: formData})
     }
   }
 }
